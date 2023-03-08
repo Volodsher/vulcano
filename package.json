@@ -1,0 +1,24 @@
+{
+  "name": "vulcano",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Volodsher/vulcano.git"
+  },
+  "author": "Volodsher",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Volodsher/vulcano/issues"
+  },
+  "homepage": "https://github.com/Volodsher/vulcano#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  }
+}
