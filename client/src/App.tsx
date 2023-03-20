@@ -24,7 +24,7 @@ function App() {
           position: 'relative',
           backgroundColor: 'rgb(70, 128, 179, 0.9)',
           borderRadius: '20rem / 5rem',
-          padding: '1rem',
+          padding: '1rem 1rem 3rem',
           marginTop: '2rem',
           marginBottom: '2rem',
         }}

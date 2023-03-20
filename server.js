@@ -15,6 +15,8 @@ app.get('/api', (req, res) => {
   res.send('We have started!');
 });
 
+app.use('/api/mail', require('./routes/api/mail'));
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'index.html'));
 });

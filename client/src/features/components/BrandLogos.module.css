@@ -1,0 +1,23 @@
+.projectCard {
+}
+
+/* Link {
+  transition: transform 0.1s ease;
+}
+
+Link:hover {
+  cursor: pointer;
+  transform: scale(1.03, 1.03);
+} */
+
+@media (max-width: 800px) {
+  .brandLogos {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 500px) {
+  .myBrandLogosCard {
+    flex-direction: column;
+  }
+}

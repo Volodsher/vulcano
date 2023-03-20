@@ -7,32 +7,41 @@ interface HamburgerButtonProps {
 
 export default function HamburgerButton(props: HamburgerButtonProps) {
   return (
-    <div style={{
-      // position: 'absolute',
-      // right: '2rem',
-      // bottom: '2rem'
-    }}>
-      <div 
+    <div
+      style={
+        {
+          // position: 'absolute',
+          // right: '2rem',
+          // bottom: '2rem'
+        }
+      }
+    >
+      <div
         className={styles.hamburgerMenuButton}
         onClick={props.changeMenuStatus}
       >
-        <div 
+        <div
           className={
             props.menuOpen
-            ? `${styles.firstLine} ${styles.firstLineAngle}`
-            : styles.firstLine}
+              ? `${styles.firstLine} ${styles.firstLineAngle}`
+              : styles.firstLine
+          }
         />
         <div
-          className={props.menuOpen
-            ? `${styles.secondLine} ${styles.secondLineAngle}`
-            : styles.secondLine}
+          className={
+            props.menuOpen
+              ? `${styles.secondLine} ${styles.secondLineAngle}`
+              : styles.secondLine
+          }
         />
         <div
-          className={props.menuOpen
-            ? `${styles.thirdLine} ${styles.thirdLineAngle}`
-            : styles.thirdLine}
+          className={
+            props.menuOpen
+              ? `${styles.thirdLine} ${styles.thirdLineAngle}`
+              : styles.thirdLine
+          }
         />
       </div>
     </div>
-  )
+  );
 }

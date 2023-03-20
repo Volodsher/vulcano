@@ -1,5 +1,5 @@
 import React from 'react';
-import banner from '../../slava.png';
+import banner from '../../images/slava.png';
 
 export default function Banner() {
   return (

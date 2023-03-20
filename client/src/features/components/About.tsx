@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../vulcanoWhite.png';
+import logo from '../../images/vulcanoWhite.png';
 
 export default function About() {
   return (
