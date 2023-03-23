@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const nodemailer = require('nodemailer');
 const config = require('config');
-const { body, validationResult, check } = require('express-validator');
+const { validationResult, check } = require('express-validator');
 
 // for mail
 const transporter = nodemailer.createTransport({

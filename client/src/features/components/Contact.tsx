@@ -44,9 +44,6 @@ export default function Contact(): JSX.Element {
         >
           <Box className={styles.inputNameEmail}>
             <FormLabel>Name*</FormLabel>
-            {errors.name && (
-              <FormLabel sx={{ color: '#ff8000' }}> {errors.name}</FormLabel>
-            )}
             <Input
               name="name"
               value={values.name}
@@ -58,12 +55,20 @@ export default function Contact(): JSX.Element {
               size="md"
               startDecorator={<FontAwesomeIcon icon={faUser} />}
             />
+            <Box style={{ height: '1rem' }}>
+              {errors.name && (
+                <FormLabel sx={{ color: '#ff8000', fontSize: '0.8rem' }}>
+                  {' '}
+                  {errors.name}
+                </FormLabel>
+              )}
+            </Box>
           </Box>
           <Box className={styles.inputNameEmail}>
             <FormLabel>Email*</FormLabel>
-            {errors.email && (
+            {/* {errors.email && (
               <FormLabel sx={{ color: '#ff8000' }}> {errors.email}</FormLabel>
-            )}
+            )} */}
             <Input
               name="email"
               value={values.email}
@@ -75,6 +80,14 @@ export default function Contact(): JSX.Element {
               size="md"
               startDecorator={<FontAwesomeIcon icon={faEnvelope} />}
             />
+            <Box style={{ height: '1rem' }}>
+              {errors.email && (
+                <FormLabel sx={{ color: '#ff8000', fontSize: '0.8rem' }}>
+                  {' '}
+                  {errors.email}
+                </FormLabel>
+              )}
+            </Box>
           </Box>
           <Box
             style={{
@@ -84,9 +97,9 @@ export default function Contact(): JSX.Element {
             }}
           >
             <FormLabel>Message*</FormLabel>
-            {errors.message && (
+            {/* {errors.message && (
               <FormLabel sx={{ color: '#ff9933' }}> {errors.message}</FormLabel>
-            )}
+            )} */}
             <Input
               name="message"
               value={values.message}
@@ -100,6 +113,14 @@ export default function Contact(): JSX.Element {
                 errors.message ? errors.message : 'Type your message here'
               }
             />
+            <Box style={{ height: '1rem' }}>
+              {errors.message && (
+                <FormLabel sx={{ color: '#ff8000', fontSize: '0.8rem' }}>
+                  {' '}
+                  {errors.message}
+                </FormLabel>
+              )}
+            </Box>
           </Box>
         </Box>
         <Button

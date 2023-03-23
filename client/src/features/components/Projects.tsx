@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './Projects.module.css';
-import irisphoto from '../../images/irisphoto.png';
-import pstool from '../../images/pstool.png';
-import schoolua from '../../images/schoolua.png';
-import webart from '../../images/webart.png';
-import todo from '../../images/todo.png';
+import irisphoto from '../../images/irisphoto.jpg';
+import pstool from '../../images/pstool.jpg';
+import schoolua from '../../images/schoolua.jpg';
+import webart from '../../images/webart.jpg';
+import todo from '../../images/todo.jpg';
 
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -106,11 +106,12 @@ export default function Projects(): JSX.Element {
                 margin: '0.5rem 0',
                 backgroundColor: 'rgba(110, 162, 207, 0.9)',
                 overflow: 'hidden',
+                gap: '0.5rem',
               }}
               className={styles.projectCard}
             >
               <Box>
-                <CardContent>
+                <CardContent style={{ padding: '0' }}>
                   <Typography component="div" variant="h5">
                     {project.name}
                   </Typography>
@@ -121,7 +122,11 @@ export default function Projects(): JSX.Element {
                   >
                     {project.text}
                   </Typography>
-                  <Link href={project.link} underline="hover">
+                  <Link
+                    style={{ fontWeight: 'bold', color: 'rgb(230, 243, 247)' }}
+                    href={project.link}
+                    underline="hover"
+                  >
                     {'Link to the Project'}
                   </Link>
                   <Typography
@@ -138,6 +143,7 @@ export default function Projects(): JSX.Element {
                   component="img"
                   image={project.image}
                   alt={project.name}
+                  className={styles.cardImage}
                 />
               </Link>
             </Card>

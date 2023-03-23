@@ -7,8 +7,8 @@
   overflow: clip;
   /* padding-bottom: calc(2*var(--p1));  height of footer */
   padding-bottom: 2rem; /* height of footer */
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   background-color: lightblue;
   padding-top: 7rem;
   color: white;

@@ -14,7 +14,7 @@ export default function About() {
         // `,
       }}
     >
-      <img
+      {/* <img
         src={logo}
         style={{
           float: 'left',
@@ -23,27 +23,29 @@ export default function About() {
           margin: '1rem',
           // gridArea: 'logo',
         }}
-        alt="lofo of vulcano.top"
-      />
+        alt="logo of vulcano.top"
+      /> */}
 
       <div
         style={{
           // gridArea: 'aboutText',
           color: 'white',
           textAlign: 'justify',
+          // width: '80%',
         }}
       >
         <p>
           Hello, I’m Volodymyr Sheremeta, a web developer. Here you can find
-          some of my projects and read my blog about programming and business. I
-          usually work with React.js, Wordpress and WIX. At the same time, I
-          like learning new things as well. I also enjoy creating designs and
-          illustrations in vector graphics. Especially brand logos that
-          effectively communicate a company's essence. A great logo should be
-          both aesthetically pleasing and easily recognizable. Thank you for
-          your attention, have a great day!
+          some of my projects. I usually work with React.js, Wordpress and WIX.
+          At the same time, I like learning new things as well. I also enjoy
+          creating designs and illustrations in vector graphics. Especially
+          brand logos that effectively communicate a company's essence. A great
+          logo should be both aesthetically pleasing and easily recognizable.
+          Thank you for your attention, have a great day!
         </p>
       </div>
     </div>
   );
 }
+
+//and read my blog about programming and business ()

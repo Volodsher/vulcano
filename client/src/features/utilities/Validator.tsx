@@ -81,7 +81,7 @@ export const useFormControls = () => {
       fieldValues.name &&
       fieldValues.email &&
       fieldValues.message &&
-      Object.values(errors).every((x) => x === '');
+      Object.values(errors).every((error) => error === '');
 
     return isValid;
   };
@@ -90,7 +90,7 @@ export const useFormControls = () => {
     e.preventDefault();
     validate();
     const isValid =
-      Object.values(errors).every((x) => x === '') && formIsValid();
+      Object.values(errors).every((error) => error === '') && formIsValid();
     if (isValid) {
       await PostContactForm(values, handleSuccess, errors, setErrors);
     }

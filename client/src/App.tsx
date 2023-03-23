@@ -7,6 +7,7 @@ import Projects from './features/components/Projects';
 import BrandLogos from './features/components/BrandLogos';
 import Contact from './features/components/Contact';
 import Footer from './features/components/Footer';
+import logo from './images/vulcanoWhite.png';
 
 import './App.css';
 
@@ -19,6 +20,21 @@ function App() {
 
   return (
     <div className="App">
+      <header>
+        <img
+          src={logo}
+          style={{
+            position: 'absolute',
+            // float: 'left',
+            top: '0.3rem',
+            width: '7rem',
+            height: '7rem',
+            margin: '1rem',
+            // gridArea: 'logo',
+          }}
+          alt="logo of vulcano.top"
+        />
+      </header>
       <main
         style={{
           position: 'relative',

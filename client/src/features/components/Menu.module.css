@@ -4,6 +4,19 @@
   transition: margin-top 0.2s ease, top 0.2s ease;
 }
 
+.menuTitle {
+  display: none;
+  position: absolute;
+  color: white;
+  background-color: gray;
+  /* height: 1rem;
+  width: 3rem; */
+  top: -0.4rem;
+  right: 4rem;
+  padding: 0.3rem;
+  border-radius: 0.4rem;
+}
+
 .menuButton {
   display: flex;
   justify-content: center;
@@ -22,4 +35,9 @@
 
 .menuButton:hover {
   cursor: pointer;
+}
+
+.menuLink:hover .menuTitle {
+  /* .menuLink.hovered .menuTitle { */
+  display: block;
 }

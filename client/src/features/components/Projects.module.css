@@ -1,14 +1,14 @@
 .projectCard {
 }
 
-/* Link {
+.cardImage {
   transition: transform 0.1s ease;
 }
 
-Link:hover {
+.cardImage:hover {
   cursor: pointer;
   transform: scale(1.03, 1.03);
-} */
+}
 
 @media (max-width: 800px) {
   .projects {

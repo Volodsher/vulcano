@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './BrandLogos.module.css';
+import styles2 from './Projects.module.css';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -65,11 +66,12 @@ export default function BrandLogos(): JSX.Element {
                 margin: '0.5rem 0',
                 backgroundColor: 'rgba(110, 162, 207, 0.9)',
                 overflow: 'hidden',
+                gap: '0.5rem',
               }}
               className={styles.myBrandLogosCard}
             >
               <Box>
-                <CardContent>
+                <CardContent style={{ padding: '0' }}>
                   <Typography component="div" variant="h5">
                     {brandLogo.name}
                   </Typography>
@@ -87,6 +89,7 @@ export default function BrandLogos(): JSX.Element {
               </Box>
               <Link href={brandLogo.link}>
                 <CardMedia
+                  className={styles2.cardImage}
                   component="img"
                   image={brandLogo.image}
                   alt={brandLogo.name}
