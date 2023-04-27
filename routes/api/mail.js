@@ -4,6 +4,10 @@ const nodemailer = require('nodemailer');
 const config = require('config');
 const { validationResult, check } = require('express-validator');
 
+// router.get('/api', (req, res) => {
+//   res.send('We did it');
+// });
+
 // for mail
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -35,7 +39,7 @@ router.post(
     mailOptions = {
       ...mailOptions,
       subject: `New message from ${req.body.name}  to Vulcano.top`,
-      message: `
+      text: `
       \nName: ${req.body.name}.
       \nEmail: ${req.body.email}.
       \nMassage: ${req.body.message}`,

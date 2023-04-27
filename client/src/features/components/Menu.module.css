@@ -41,3 +41,9 @@
   /* .menuLink.hovered .menuTitle { */
   display: block;
 }
+
+@media (max-width: 601px) {
+  .menuLink:hover .menuTitle {
+    display: none;
+  }
+}
