@@ -43,6 +43,7 @@ function App() {
           padding: '1rem 1rem 3rem',
           marginTop: '2rem',
           marginBottom: '2rem',
+          // overflow: 'hidden',
         }}
       >
         <Menu changeMenuStatus={togleMenu} menuOpen={menuStatus} />

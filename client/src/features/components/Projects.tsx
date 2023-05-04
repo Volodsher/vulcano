@@ -4,6 +4,7 @@ import irisphoto from '../../images/irisphoto.jpg';
 import pstool from '../../images/pstool.png';
 import schoolua from '../../images/schoolua.jpg';
 import webart from '../../images/webart.jpg';
+import comfortway from '../../images/comfortway.png';
 import todo from '../../images/todo.jpg';
 
 import { useTheme } from '@mui/material/styles';
@@ -59,6 +60,14 @@ const myProjects: Project[] = [
   },
   {
     id: '5',
+    name: 'Website Of Plumbing Company in Canada',
+    text: 'Web development, content management, UI/UX design, graphic design for plumbing company based in Ottawa, Ontario, Canada. Since this project is a simple representative website that does not require sophisticated calculations or a highly unique design, we decided to use Wordpress instead of the React.js-Node.js stack or other technologies.',
+    technologies: 'Wordpress, Elementor, PHP, MySQL',
+    link: 'https://comfortway.ca/',
+    image: comfortway,
+  },
+  {
+    id: '6',
     name: 'Todo List',
     text: "This is a simple most popular first React task for learning purposes. It's a good example to show difference between functional and class component. And also how to connect Redux to them.",
     technologies: 'React, Redux',

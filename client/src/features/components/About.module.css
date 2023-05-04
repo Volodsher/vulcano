@@ -1,0 +1,62 @@
+.p1 {
+  width: 238px;
+  margin-top: 0px;
+}
+
+.p2 {
+  width: 226px;
+}
+
+.p3 {
+  width: 214px;
+}
+.p4 {
+  width: 202px;
+}
+.p5 {
+  width: 190px;
+}
+.p6 {
+  width: 178px;
+}
+.p7 {
+  width: 166px;
+}
+
+.p8 {
+  width: 154px;
+  margin-bottom: 0px;
+}
+.p9 {
+  width: 142px;
+}
+
+.p1,
+.p2,
+.p3,
+.p4,
+.p5,
+.p6,
+.p7,
+.p8,
+.p9 {
+  text-align: justify;
+  height: 0.5rem;
+  padding-right: 0.3rem;
+}
+
+@media (max-width: 800px) {
+  .aboutContainer {
+    font-size: 0.6rem;
+  }
+
+  /* .aboutText1 {
+    width: 90%;
+  } */
+}
+
+@media (max-width: 500px) {
+  .myBrandLogosCard {
+    flex-direction: column;
+  }
+}
