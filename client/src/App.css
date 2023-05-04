@@ -19,3 +19,7 @@
   background-size: cover;
   background-position: center;
 }
+
+:root {
+  --x: 0px;
+}

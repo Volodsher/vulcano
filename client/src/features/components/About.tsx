@@ -22,9 +22,7 @@ export default function About() {
     >
       <div
         style={{
-          // overflow: 'hidden',
           display: 'flex',
-          // height: '100%',
         }}
       >
         <div className={styles.aboutText1}>
@@ -41,47 +39,20 @@ export default function About() {
             (Express), MySQL, or MongoDB. If the {textStretcher}
           </p>
           <p className={styles.p5}>
-            project requires a simple, quick{textStretcher}
+            project requires a simple, quick solution{textStretcher}
           </p>
           <p className={styles.p6}>
-            solution with blogging capabilities,{textStretcher}
+            with blogging capabilities, I usualy{textStretcher}
           </p>
           <p className={styles.p7}>
-            I usually choose Wordpress,{textStretcher}
+            choose Wordpress, as the best option.{textStretcher}
           </p>
-          <p className={styles.p8}> as the best option.{textStretcher}</p>
         </div>
-        <div
-          style={{
-            // display: 'inline-block',
-            width: '100%',
-            marginLeft: '-2rem',
-            marginRight: '-20rem',
-            backgroundPositionY: 'center',
-            // maxWidth: 'calc(0.25*1920px)',
-            // maxWidth: '500px',
-            // minWidth: '150px',
-            // paddingTop: '1.5rem',
-            // margin: '0 1rem',
-            backgroundColor: 'green',
-            transform: 'skew(-33deg)',
-            overflow: 'hidden',
-
-            // background-size: cover;
-          }}
-        >
+        <div className={styles.aboutImageWrapper}>
           <div
+            className={styles.aboutImage}
             style={{
-              // display: 'inline-block',
-              marginLeft: '-5rem',
-              width: '100%',
-              height: '100%',
-              backgroundColor: 'blue',
-
-              transform: 'skew(33deg)',
               backgroundImage: `url('${me}')`,
-
-              backgroundSize: 'cover',
             }}
           ></div>
         </div>
@@ -89,13 +60,6 @@ export default function About() {
       <p
         style={{
           lineHeight: '2',
-          // display: 'inline-block',
-          // width: '400px',
-          // maxWidth: 'calc(0.25*1920px)',
-          // maxWidth: '500px',
-          // minWidth: '150px',
-          // paddingTop: '1.5rem',
-          // margin: '0 1rem',
           marginRight: '1rem',
           textAlign: 'justify',
         }}
@@ -109,5 +73,3 @@ export default function About() {
     </div>
   );
 }
-
-//and read my blog about programming and business ()
