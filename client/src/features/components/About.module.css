@@ -21,7 +21,7 @@
 }
 .p7 {
   width: calc(166px + var(--x));
-  margin-bottom: 0px;
+  margin-bottom: 0.3rem;
 }
 
 .p1,
@@ -53,8 +53,34 @@
   height: 100%;
   background-color: blue;
   transform: skew(33deg);
-  background-position-y: 40%;
+  background-position-y: 70%;
   background-size: cover;
+}
+
+@media (max-width: 1280px) {
+  .aboutContainer {
+    font-size: 1rem;
+  }
+
+  .p1,
+  .p2,
+  .p3,
+  .p4,
+  .p5,
+  .p6,
+  .p7,
+  .p8,
+  .p9 {
+    --x: 450px;
+  }
+
+  .aboutImageWrapper {
+    transform: skew(-20deg);
+  }
+
+  .aboutImage {
+    transform: skew(25deg);
+  }
 }
 
 @media (max-width: 800px) {
@@ -72,6 +98,14 @@
   .p8,
   .p9 {
     --x: 100px;
+  }
+
+  .aboutImageWrapper {
+    transform: skew(-30deg);
+  }
+
+  .aboutImage {
+    transform: skew(30deg);
   }
 }
 
