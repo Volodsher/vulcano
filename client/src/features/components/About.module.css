@@ -57,10 +57,10 @@
   background-size: cover;
 }
 
-@media (max-width: 1280px) {
-  .aboutContainer {
+@media (max-width: 1920px) {
+  /* .aboutContainer {
     font-size: 1rem;
-  }
+  } */
 
   .p1,
   .p2,
@@ -75,11 +75,38 @@
   }
 
   .aboutImageWrapper {
-    transform: skew(-20deg);
+    transform: skew(-17deg);
+    margin-left: -1rem;
   }
 
   .aboutImage {
-    transform: skew(25deg);
+    transform: skew(17deg);
+  }
+}
+
+@media (max-width: 1280px) {
+  .aboutContainer {
+    font-size: 1rem;
+  }
+
+  .p1,
+  .p2,
+  .p3,
+  .p4,
+  .p5,
+  .p6,
+  .p7,
+  .p8,
+  .p9 {
+    --x: 200px;
+  }
+
+  .aboutImageWrapper {
+    transform: skew(-27deg);
+  }
+
+  .aboutImage {
+    transform: skew(27deg);
   }
 }
 
