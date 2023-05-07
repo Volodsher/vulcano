@@ -27,7 +27,7 @@ export default function About() {
       >
         <div className={styles.aboutText1}>
           <p className={styles.p1}>
-            Hello, I'm Volodymyr Sheremeta - web developer. {textStretcher}
+            Hello, I'm Volodymyr Sheremeta - a web developer. {textStretcher}
           </p>
           <p className={styles.p2}>
             Here you can find some of my projects. {textStretcher}
