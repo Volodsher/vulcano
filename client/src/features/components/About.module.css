@@ -147,6 +147,7 @@
 
   .aboutImageWrapper {
     transform: skew(-33deg);
+    margin-left: -2rem;
   }
 
   .aboutImage {
