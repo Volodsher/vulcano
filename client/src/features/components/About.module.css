@@ -81,9 +81,9 @@
 }
 
 @media (max-width: 1280px) {
-  .aboutContainer {
+  /* .aboutContainer {
     font-size: 1rem;
-  }
+  } */
 
   .p1,
   .p2,
@@ -107,9 +107,9 @@
 }
 
 @media (max-width: 800px) {
-  .aboutContainer {
+  /* .aboutContainer {
     font-size: 0.8rem;
-  }
+  } */
 
   .p1,
   .p2,
@@ -158,7 +158,7 @@
     flex-direction: column;
   }
 
-  .aboutContainer {
+  /* .aboutContainer {
     font-size: 0.6rem;
-  }
+  } */
 }

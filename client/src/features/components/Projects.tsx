@@ -99,7 +99,6 @@ export default function Projects(): JSX.Element {
           display: 'flex',
           justifyContent: 'space-between',
           flexWrap: 'wrap',
-          // margin: '2rem 0',
         }}
         className={styles.projects}
       >
