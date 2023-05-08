@@ -20,11 +20,7 @@ export default function About() {
         marginRight: '-1rem',
       }}
     >
-      <div
-        style={{
-          display: 'flex',
-        }}
-      >
+      <div className={styles.diagonalTextL}>
         <div className={styles.aboutText1}>
           <p className={styles.p1}>
             Hello, I'm Volodymyr Sheremeta - a web developer. {textStretcher}
@@ -47,6 +43,32 @@ export default function About() {
           <p className={styles.p7}>
             choose Wordpress, as the best option.{textStretcher}
           </p>
+        </div>
+        <div className={styles.aboutImageWrapper}>
+          <div
+            className={styles.aboutImage}
+            style={{
+              backgroundImage: `url('${me}')`,
+            }}
+          ></div>
+        </div>
+      </div>
+      <div className={styles.diagonalTextS}>
+        <div className={styles.aboutText1}>
+          <p className={styles.p1}>
+            Hello, I'm Volodymyr Sheremeta{textStretcher}
+          </p>
+          <p className={styles.p2}>
+            - a web developer. Here you{textStretcher}
+          </p>
+          <p className={styles.p3}>can find some of my {textStretcher}</p>
+          <p className={styles.p4}>projects. I usually work{textStretcher}</p>
+          <p className={styles.p5}> with React.js, Node.js{textStretcher}</p>
+          <p className={styles.p6}>(Express), MySQL, or {textStretcher}</p>
+          <p className={styles.p7}>MongoDB. If the {textStretcher}</p>
+          <p className={styles.p8}>project requires a{textStretcher}</p>
+          <p className={styles.p9}>simple solution I{textStretcher}</p>
+          <p className={styles.p10}>use Wordpress.{textStretcher}</p>
         </div>
         <div className={styles.aboutImageWrapper}>
           <div
