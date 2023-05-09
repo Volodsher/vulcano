@@ -29,20 +29,15 @@ export default function About() {
             Here you can find some of my projects. {textStretcher}
           </p>
           <p className={styles.p3}>
-            I usually work with React.js, Node.js {textStretcher}
+            I mostly work with React.js, Node.js (Express), {textStretcher}
           </p>
           <p className={styles.p4}>
-            (Express), MySQL, or MongoDB. If the {textStretcher}
+            MySQL, or MongoDB. If the project requires{textStretcher}
           </p>
           <p className={styles.p5}>
-            project requires a simple, quick solution{textStretcher}
+            a simple, quick solution with blogging{textStretcher}
           </p>
-          <p className={styles.p6}>
-            with blogging capabilities, I usualy{textStretcher}
-          </p>
-          <p className={styles.p7}>
-            choose Wordpress, as the best option.{textStretcher}
-          </p>
+          <p className={styles.p6}>capabilities, I choose Wordpress</p>
         </div>
         <div className={styles.aboutImageWrapper}>
           <div
@@ -62,7 +57,7 @@ export default function About() {
             - a web developer. Here you{textStretcher}
           </p>
           <p className={styles.p3}>can find some of my {textStretcher}</p>
-          <p className={styles.p4}>projects. I usually work{textStretcher}</p>
+          <p className={styles.p4}>projects. I mostly work{textStretcher}</p>
           <p className={styles.p5}> with React.js, Node.js{textStretcher}</p>
           <p className={styles.p6}>(Express), MySQL, or {textStretcher}</p>
           <p className={styles.p7}>MongoDB. If the {textStretcher}</p>
