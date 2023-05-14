@@ -43,7 +43,7 @@
 }
 
 @media (max-width: 601px) {
-  .menuLink:hover .menuTitle {
-    display: none;
+  .menuTitle {
+    display: block;
   }
 }

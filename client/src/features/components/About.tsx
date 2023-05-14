@@ -37,7 +37,7 @@ export default function About() {
           <p className={styles.p5}>
             a simple, quick solution with blogging{textStretcher}
           </p>
-          <p className={styles.p6}>capabilities, I choose Wordpress</p>
+          <p className={styles.p6}>capabilities, I choose Wordpress.</p>
         </div>
         <div className={styles.aboutImageWrapper}>
           <div
@@ -80,13 +80,7 @@ export default function About() {
           marginRight: '1rem',
           textAlign: 'justify',
         }}
-      >
-        At the same time, I am always eager to learn new things. I also enjoy
-        creating designs and illustrations using vector graphics, especially
-        logos that effectively communicate a company's essence. A great logo
-        should be both aesthetically pleasing and easily recognizable. Thank you
-        for your attention, and have a great day!
-      </p>
+      ></p>
     </div>
   );
 }

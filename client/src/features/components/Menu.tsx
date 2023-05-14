@@ -16,13 +16,10 @@ export default function Menu({
   changeMenuStatus: () => void;
   menuOpen: boolean;
 }): JSX.Element {
-  // const [hoveredLink, setHoveredLink] = useState<string | null>(null);
-
   return (
     <div
       className={styles.menu}
       style={{
-        // overflow: 'clip',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -46,7 +43,6 @@ export default function Menu({
       >
         <button
           style={{
-            // top: '3rem',
             width: '4rem',
             height: '4rem',
           }}
@@ -63,36 +59,44 @@ export default function Menu({
       <a
         href="https://github.com/Volodsher"
         className={styles.menuLink}
-        // className={`${styles.menuLink} ${
-        //   hoveredLink === 'github' ? 'hovered' : ''
-        // }`}
-        // onMouseEnter={() => setHoveredLink('github')}
         style={{
           marginTop: menuOpen ? '0' : '-4rem',
           top: menuOpen ? '7.5rem' : '3rem',
         }}
+        target="_blank"
       >
         <button className={styles.menuButton} onClick={changeMenuStatus}>
           <FontAwesomeIcon icon={faGithub} size="2x" />
         </button>
-        <p className={styles.menuTitle}>Github</p>
+        <p
+          style={{
+            display: menuOpen ? '' : 'none',
+          }}
+          className={styles.menuTitle}
+        >
+          Github
+        </p>
       </a>
       <a
         href="https://medium.com/@volodsher"
-        // className={`${styles.menuLink} ${
-        //   hoveredLink === 'medium' ? 'hovered' : ''
-        // }`}
-        // onMouseEnter={() => setHoveredLink('medium')}
         className={styles.menuLink}
         style={{
           marginTop: menuOpen ? '0' : '-4rem',
           top: menuOpen ? '11rem' : '3rem',
         }}
+        target="_blank"
       >
         <button className={styles.menuButton} onClick={changeMenuStatus}>
           <FontAwesomeIcon icon={faMedium} size="2x" />
         </button>
-        <p className={styles.menuTitle}>Medium.com</p>
+        <p
+          style={{
+            display: menuOpen ? '' : 'none',
+          }}
+          className={styles.menuTitle}
+        >
+          Medium
+        </p>
       </a>
       <a
         href="https://www.linkedin.com/in/volodymyr-sheremeta"
@@ -101,11 +105,19 @@ export default function Menu({
           marginTop: menuOpen ? '0' : '-4rem',
           top: menuOpen ? '14.5rem' : '3rem',
         }}
+        target="_blank"
       >
         <button className={styles.menuButton} onClick={changeMenuStatus}>
           <FontAwesomeIcon icon={faLinkedin} size="2x" />
         </button>
-        <p className={styles.menuTitle}>Linkedin</p>
+        <p
+          style={{
+            display: menuOpen ? '' : 'none',
+          }}
+          className={styles.menuTitle}
+        >
+          Linkedin
+        </p>
       </a>
 
       <a
@@ -120,7 +132,14 @@ export default function Menu({
           {' '}
           <FontAwesomeIcon icon={faEnvelope} size="2x" />
         </button>
-        <p className={styles.menuTitle}>Contact</p>
+        <p
+          style={{
+            display: menuOpen ? '' : 'none',
+          }}
+          className={styles.menuTitle}
+        >
+          Contact
+        </p>
       </a>
     </div>
   );

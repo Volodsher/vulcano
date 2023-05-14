@@ -44,6 +44,9 @@ export default function BrandLogos(): JSX.Element {
       >
         Brand Logos
       </Typography>
+      <p style={{ textAlign: 'center' }}>
+        I also specialize in creating logos.
+      </p>
       <div
         style={{
           display: 'flex',
