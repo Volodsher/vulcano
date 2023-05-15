@@ -28,9 +28,9 @@ const myProjects: Project[] = [
   {
     id: '1',
     name: "A Photographer's Website",
-    text: 'I had the pleasure of creating the UI design for the site in a collaborative effort with a skilled photographer.',
+    text: 'I had the pleasure of creating the UI design and back end for the site in a collaborative effort with a skilled photographer.',
     technologies:
-      'React, Exprss(Node), Redux, React-Router, Font, Font Awesome',
+      'React.js, Express (Node.js), Redux, React-Router, Font Awesome',
     link: 'https://dreamsmile.photography/',
     image: irisphoto,
   },
@@ -38,7 +38,7 @@ const myProjects: Project[] = [
     id: '2',
     name: 'Psychological Tool',
     text: 'An app (first stage) for measuring the level of happiness. A main idea:  a person is happy when everything is good with what is important to him/her (family, relatives, friends, favorite things), and also when what a person does is what he/she wants, can and should do.',
-    technologies: 'React',
+    technologies: 'React, MUI',
     link: 'https://volodsher.github.io/am-i-happy/',
     image: pstool,
   },
@@ -69,7 +69,7 @@ const myProjects: Project[] = [
   {
     id: '6',
     name: 'Todo List',
-    text: "This is a simple most popular first React task for learning purposes. It's a good example to show difference between functional and class component. And also how to connect Redux to them.",
+    text: "This is a simple most popular first React task for learning purposes. It's a good example to show difference between functional and class component. And also how to connect Redux to them.  I use it to explain to my friends how React works. ",
     technologies: 'React, Redux',
     link: 'https://volodsher.github.io/todo/',
     image: todo,
@@ -134,6 +134,7 @@ export default function Projects(): JSX.Element {
                     style={{ fontWeight: 'bold', color: 'rgb(230, 243, 247)' }}
                     href={project.link}
                     underline="hover"
+                    target="_blank"
                   >
                     {'Link to the Project'}
                   </Link>
@@ -146,7 +147,7 @@ export default function Projects(): JSX.Element {
                   </Typography>
                 </CardContent>
               </Box>
-              <Link href={project.link}>
+              <Link href={project.link} target="_blank">
                 <CardMedia
                   component="img"
                   image={project.image}
