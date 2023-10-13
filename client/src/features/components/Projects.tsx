@@ -38,7 +38,7 @@ const myProjects: Project[] = [
   },
   {
     id: '1.1',
-    name: 'Composer Website of Euriy Derkach.',
+    name: "Composer's Website of Euriy Derkach",
     text: 'Landing page for a Ukrainian Canadian composer Euriy Derkach. Providing regular technical support, maintenance, adding content, improving UI/UX.',
     technologies: 'Next.js(13), Tailwind, Typescript',
     link: 'https://euriyderkach.com/',
