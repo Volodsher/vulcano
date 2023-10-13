@@ -6,6 +6,8 @@ import schoolua from '../../images/schoolua.jpg';
 import webart from '../../images/webart.jpg';
 import comfortway from '../../images/comfortway.png';
 import todo from '../../images/todo.jpg';
+import osu from '../../images/osu.png';
+import derkach from '../../images/derkach.png';
 
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -27,12 +29,28 @@ interface Project {
 const myProjects: Project[] = [
   {
     id: '1',
-    name: "A Photographer's Website",
+    name: "Photographer's Website",
     text: 'I had the pleasure of creating the UI design and back end for the site in a collaborative effort with a skilled photographer.',
     technologies:
       'React.js, Express (Node.js), Redux, React-Router, Font Awesome',
     link: 'https://dreamsmile.photography/',
     image: irisphoto,
+  },
+  {
+    id: '1.1',
+    name: 'Composer Website of Euriy Derkach.',
+    text: 'Landing page for a Ukrainian Canadian composer Euriy Derkach. Providing regular technical support, maintenance, adding content, improving UI/UX.',
+    technologies: 'Next.js(13), Tailwind, Typescript',
+    link: 'https://euriyderkach.com/',
+    image: derkach,
+  },
+  {
+    id: '1.2',
+    name: "Non-for-profit Organization's Website",
+    text: 'Landing page for a non-for-profit organization OSUDemocracy. Providing regular technical support, maintenance, adding content, improving UI/UX.',
+    technologies: 'React.js, Tailwind, Typescript',
+    link: 'https://osudemocracy.com/',
+    image: osu,
   },
   {
     id: '2',
