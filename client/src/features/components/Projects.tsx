@@ -84,14 +84,6 @@ const myProjects: Project[] = [
     link: 'https://comfortway.ca/',
     image: comfortway,
   },
-  {
-    id: '6',
-    name: 'Todo List',
-    text: "This is a simple most popular first React task for learning purposes. It's a good example to show difference between functional and class component. And also how to connect Redux to them.  I use it to explain to my friends how React works. ",
-    technologies: 'React, Redux',
-    link: 'https://volodsher.github.io/todo/',
-    image: todo,
-  },
 ];
 
 export default function Projects(): JSX.Element {

@@ -14,8 +14,8 @@ export default function Footer() {
         marginBottom: '1rem',
       }}
     >
-      {/* &copy; Vulcano.top 2023 */}
-      2023 Volodymyr Sheremeta, Vulcano.top
+      {/* &copy; Vulcano.top 2024 */}
+      2024 Volodymyr Sheremeta, Vulcano.top
     </div>
   );
 }

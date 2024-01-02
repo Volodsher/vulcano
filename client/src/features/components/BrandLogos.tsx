@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 
 import comfortWay from '../../images/brandLogos/comfortWayGood.jpeg';
+import dual from '../../images/brandLogos/dual.jpg';
 
 interface BrandLogo {
   id: string;
@@ -25,6 +26,13 @@ const myBrandLogos: BrandLogo[] = [
     text: 'This is a brand logo of a plumbing company.',
     link: 'https://www.facebook.com/profile.php?id=100086258155451',
     image: comfortWay,
+  },
+  {
+    id: '2',
+    name: 'Dual Strength Windows and Doors Inc.',
+    text: 'This is a brand logo of a windows and doors company.',
+    link: 'https://dualstrength.ca/',
+    image: dual,
   },
 ];
 
@@ -85,7 +93,11 @@ export default function BrandLogos(): JSX.Element {
                   >
                     {brandLogo.text}
                   </Typography>
-                  <Link href={brandLogo.link} underline="hover">
+                  <Link
+                    href={brandLogo.link}
+                    style={{ color: 'white' }}
+                    underline="hover"
+                  >
                     {'Link to the Project'}
                   </Link>
                 </CardContent>
