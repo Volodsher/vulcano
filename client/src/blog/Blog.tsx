@@ -7,5 +7,12 @@ export default function Blog() {
   // Similar to `getServerSideProps`.
   // const dynamicData = await fetch(`https://...`, { cache: 'no-store' });
 
-  return <div>Blog </div>;
+  return (
+    <div>
+      Blog
+      <div>news section</div>
+      {/* pagination or button with show more */}
+      <div>pagination</div>
+    </div>
+  );
 }
