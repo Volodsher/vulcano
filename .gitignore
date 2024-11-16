@@ -31,3 +31,4 @@ yarn-error.log\*
 # config
 
 config/default.json
+config/dbMySQL.js
