@@ -21,7 +21,6 @@ var storage = multer.diskStorage({
   //   cb(null, req.body[image]);
   // },
 });
-// ({ storage: storage });
 
 const upload = multer({
   storage: storage,
@@ -35,25 +34,34 @@ router.post(
   '/',
   auth,
   upload,
-  check('title', 'Title is required').notEmpty(),
-  check('text', 'Text is required').notEmpty(),
+  check('post_title', 'Title is required').notEmpty(),
+  check('post_text', 'Text is required').notEmpty(),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { title, text, image } = req.body;
+    const {
+      post_author,
+      post_title,
+      post_short_text,
+      post_text,
+      post_images,
+      post_status,
+    } = req.body;
 
     const id = uuidv4();
-    const date = new Date().toJSON().slice(0, 10);
+    const post_published_date = new Date().toJSON().slice(0, 10);
 
     const newPost = {
       id,
-      title,
-      text,
-      image,
-      date,
+      post_author,
+      post_title,
+      post_short_text,
+      post_text,
+      post_images,
+      post_status,
     };
 
     if (req.file) {
@@ -70,16 +78,6 @@ router.post(
           `./uploads/blog/${image.substring(0, image.length - 4)}800.jpg`,
           resizedImage800Buffer
         );
-        // Resize image to width 350px
-        const resizedImage350Buffer = await sharp(req.file.path)
-          .resize({ width: 350 })
-          .toBuffer();
-        // Save or upload the resized image with width 350px
-        // Example: fs.writeFileSync('path/to/save/resizedImage350.jpg', resizedImage350Buffer);
-        fs.writeFileSync(
-          `./uploads/blog/${image.substring(0, image.length - 4)}350.jpg`,
-          resizedImage350Buffer
-        );
 
         // Add the resized images to the newPost object or update the image field with their base64 representation
         // newPost.image800 = resizedImage800Buffer.toString('base64');
@@ -90,6 +88,7 @@ router.post(
       }
     }
 
+    console.log(req.user);
     connectDBMySQL.getConnection((err, connection) => {
       if (err) {
         console.error(err);
@@ -97,16 +96,24 @@ router.post(
       }
 
       const addNewPost =
-        'INSERT INTO posts (id, title, text, image, date) VALUES (?, ?, ?, ?, ?)';
+        'INSERT INTO posts (id, post_author, post_title, post_short_text, post_text, post_images, post_status) VALUES (?, ?, ?, ?, ?, ?, ?)';
       connection.query(
         addNewPost,
-        [id, title, text, image, date],
+        [
+          id,
+          post_author,
+          post_title,
+          post_short_text,
+          post_text,
+          post_images,
+          post_status,
+        ],
         (err, results) => {
           connection.release();
 
           if (err) {
             console.error(err);
-            return res.status(500).json({ error: 'Database error 3' });
+            return res.status(500).json({ error: 'Database error 2' });
           }
           // results.message = 'You successfully added a new post!';
           // res.json(results.message);
@@ -124,7 +131,7 @@ router.get('/', (req, res) => {
   connectDBMySQL.getConnection((err, connection) => {
     if (err) {
       console.error(err);
-      return res.status(500).json({ error: 'Database error 1' });
+      return res.status(500).json({ error: 'Database error 3' });
     }
 
     const getAllPosts = 'SELECT * FROM posts ORDER BY date ASC';
@@ -165,7 +172,7 @@ router.get('/:id', (req, res) => {
   connectDBMySQL.getConnection((err, connection) => {
     if (err) {
       console.error(err);
-      return res.status(500).json({ error: 'Database error 1' });
+      return res.status(500).json({ error: 'Database error 4' });
     }
 
     const getOnePosts = `SELECT * FROM posts WHERE id = ?`;
@@ -174,7 +181,7 @@ router.get('/:id', (req, res) => {
 
       if (err) {
         console.error(err);
-        return res.status(500).json({ error: 'Database error 2' });
+        return res.status(500).json({ error: 'Database error 5' });
       }
 
       res.send(rows);
@@ -215,7 +222,7 @@ router.delete('/:id', auth, (req, res) => {
   connectDBMySQL.getConnection((err, connection) => {
     if (err) {
       console.error(err);
-      return res.status(500).json({ error: 'Database error 1' });
+      return res.status(500).json({ error: 'Database error 6' });
     }
 
     const checkPostQuery = 'SELECT 1 FROM posts WHERE id = ? LIMIT 1';
@@ -223,7 +230,7 @@ router.delete('/:id', auth, (req, res) => {
       if (err) {
         console.error(err);
         connection.release();
-        return res.status(500).json({ error: 'Database error 2' });
+        return res.status(500).json({ error: 'Database error 7' });
       }
 
       if (rows.length === 0) {
@@ -267,7 +274,7 @@ router.delete('/:id', auth, (req, res) => {
 
         if (err) {
           console.error(err);
-          return res.status(500).json({ error: 'Database error 3' });
+          return res.status(500).json({ error: 'Database error 8' });
         }
 
         results.message = 'You successfully deleted a post!';
@@ -307,7 +314,7 @@ router.put('/:id', auth, async (req, res) => {
   connectDBMySQL.getConnection((err, connection) => {
     if (err) {
       console.log(err);
-      return res.status(500).json({ error: 'Database error 1' });
+      return res.status(500).json({ error: 'Database error 9' });
     }
 
     const checkPostQuery = 'SELECT 1 FROM posts WHERE id = ? LIMIT 1';
@@ -315,7 +322,7 @@ router.put('/:id', auth, async (req, res) => {
       if (err) {
         console.error(err);
         connection.release();
-        return res.status(500).json({ error: 'Database rorror 2' });
+        return res.status(500).json({ error: 'Database rorror 10' });
       }
 
       if (rows.length === 0) {
@@ -351,7 +358,7 @@ router.put('/:id', auth, async (req, res) => {
 
           if (err) {
             console.log(err);
-            return res.status(500).json({ error: 'Database error 3' });
+            return res.status(500).json({ error: 'Database error 11' });
           }
           // console.log(results);
           // results.message = `You just edited post: ${title}`;

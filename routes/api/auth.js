@@ -7,16 +7,12 @@ const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const connectDBMySQL = require('../../config/dbMySQL');
 
-const User = require('../../models/User');
-
 // @route GET api/auth
 // @dexc  Test route
 // @access Public
 
 router.get('/', auth, async (req, res) => {
   try {
-    // const user = await User.findById(req.user.id).select('-password');
-
     connectDBMySQL.getConnection((err, connection) => {
       if (err) {
         console.error(err);
@@ -24,7 +20,7 @@ router.get('/', auth, async (req, res) => {
       }
 
       const getUserQuery =
-        'SELECT id, name, email, status FROM users WHERE id = ? LIMIT 1';
+        'SELECT id, user_login, user_email, user_status FROM users WHERE id = ? LIMIT 1';
 
       connection.query(getUserQuery, [req.user.id], async (err, rows) => {
         if (err) {
@@ -45,7 +41,7 @@ router.get('/', auth, async (req, res) => {
     });
   } catch (error) {
     console.error(error.message);
-    res.status(500).send('Server Error');
+    res.status(500).send('Server Error 1');
   }
 });
 
@@ -57,7 +53,7 @@ router.post(
   '/',
   [
     check('nameOrEmail', 'Please include your email or name').exists(),
-    check('password', 'Password is required').exists(),
+    check('user_pass', 'Password is required').exists(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -65,14 +61,9 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { nameOrEmail, password } = req.body;
+    const { nameOrEmail, user_pass } = req.body;
 
     try {
-      // Mongoose
-      // let user = await User.findOne({
-      //   $or: [{ email: nameOrEmail }, { name: nameOrEmail }],
-      // });
-
       connectDBMySQL.getConnection((err, connection) => {
         if (err) {
           console.error(err);
@@ -80,7 +71,7 @@ router.post(
         }
 
         const checkUserQuery =
-          'SELECT * FROM users WHERE name = ? OR email = ? LIMIT 1';
+          'SELECT * FROM users WHERE user_login = ? OR user_email = ? LIMIT 1';
         connection.query(
           checkUserQuery,
           [nameOrEmail, nameOrEmail],
@@ -110,7 +101,7 @@ router.post(
                   .json({ errors: [{ msg: 'Invalid Credentials ' }] });
               }
 
-              const isMatch = await bcrypt.compare(password, user.password);
+              const isMatch = await bcrypt.compare(user_pass, user.user_pass);
               console.log(isMatch);
 
               if (!isMatch) {
@@ -136,7 +127,7 @@ router.post(
               );
             } catch (error) {
               console.log(error.message);
-              res.status(500).send('Server error');
+              res.status(500).send('Server error 2');
             }
           }
         );
