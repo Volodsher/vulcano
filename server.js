@@ -20,10 +20,11 @@ app.use('/api/mail', require('./routes/api/mail'));
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/posts', require('./routes/api/posts'));
+app.use('/api/projects', require('./routes/api/projects'));
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// });
 
 const PORT = process.env.PORT || 5002;
 
