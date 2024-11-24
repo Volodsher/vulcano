@@ -10,7 +10,7 @@ const sharp = require('sharp');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './uploads/blog');
+    cb(null, './uploads/projects');
   },
   filename: function (req, file, cb) {
     console.log('should be a new name here', req.body.image);
@@ -23,62 +23,29 @@ const upload = multer({
   limits: { fileSize: 2000000 },
 }).single('file');
 
-// @route  POST api/posts
-// @desc   Create a post
+// @route  POST api/projects
+// @desc   Create a projects
 // @access Private
 router.post(
   '/',
   auth,
   upload,
-  check('post_title', 'Title is required').notEmpty(),
-  check('post_text', 'Text is required').notEmpty(),
+  check('project_name', 'Project name is required').notEmpty(),
+  check('project_short_text', 'Short text is required').notEmpty(),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { post_title, post_short_text, post_text, post_images, post_status } =
-      req.body;
+    const {
+      project_name,
+      project_short_text,
+      project_text,
+      project_technologies,
+      project_link,
+    } = req.body;
     const id = uuidv4();
-    const post_published_date = new Date().toJSON().slice(0, 10);
-    const postUserId = req.user.id;
-    let post_author = '';
-
-    // Get user's name
-    // Function to get post author's name
-    const getPostAuthor = async (postUserId) => {
-      return new Promise((resolve, reject) => {
-        connectDBMySQL.getConnection((err, connection) => {
-          if (err) {
-            return reject(err);
-          }
-
-          const postsUserQuery = 'SELECT user_login FROM users WHERE id = ?';
-          connection.query(postsUserQuery, [postUserId], (err, results) => {
-            connection.release();
-
-            if (err) {
-              return reject(err);
-            }
-
-            if (results.length > 0) {
-              resolve(results[0].user_login); // Return the user login
-            } else {
-              reject(new Error('User not found'));
-            }
-          });
-        });
-      });
-    };
-
-    // Get the post author's name (asynchronously)
-    try {
-      post_author = await getPostAuthor(postUserId); // Await the result of the database query
-    } catch (error) {
-      console.error(error);
-      return res.status(500).json({ error: 'Error fetching author' });
-    }
 
     if (req.file) {
       console.log(req.file);
@@ -91,7 +58,7 @@ router.post(
         // Save or upload the resized image with width 800px
         // Example: fs.writeFileSync('path/to/save/resizedImage800.jpg', resizedImage800Buffer);
         fs.writeFileSync(
-          `./uploads/blog/${image.substring(0, image.length - 4)}800.jpg`,
+          `./uploads/projects/${image.substring(0, image.length - 4)}800.jpg`,
           resizedImage800Buffer
         );
 
