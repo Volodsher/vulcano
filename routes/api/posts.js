@@ -38,8 +38,19 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { post_title, post_short_text, post_text, post_images, post_status } =
-      req.body;
+    const {
+      post_title,
+      post_title_ua,
+      post_title_fr,
+      post_short_text,
+      post_short_text_ua,
+      post_short_text_fr,
+      post_text,
+      post_text_ua,
+      post_text_fr,
+      post_images,
+      post_status,
+    } = req.body;
     const id = uuidv4();
     const post_published_date = new Date().toJSON().slice(0, 10);
     const postUserId = req.user.id;
@@ -106,8 +117,14 @@ router.post(
     const newPost = {
       id,
       post_title,
+      post_title_ua,
+      post_title_fr,
       post_short_text,
+      post_short_text_ua,
+      post_short_text_fr,
       post_text,
+      post_text_ua,
+      post_text_fr,
       post_images,
       post_status,
       post_published_date,
