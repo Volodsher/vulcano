@@ -40,8 +40,14 @@ router.post(
 
     const {
       project_name,
+      project_name_ua,
+      project_name_fr,
       project_short_text,
+      project_short_text_ua,
+      project_short_text_fr,
       project_text,
+      project_text_ua,
+      project_text_fr,
       project_technologies,
       project_link,
     } = req.body;
@@ -72,6 +78,16 @@ router.post(
 
     const newPost = {
       id,
+      project_name,
+      project_name_ua,
+      project_name_fr,
+      project_short_text,
+      project_short_text_ua,
+      project_short_text_fr,
+      project_text,
+      project_text_ua,
+      project_text_fr,
+
       post_title,
       post_short_text,
       post_text,
