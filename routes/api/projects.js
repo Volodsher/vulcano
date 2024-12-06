@@ -31,7 +31,16 @@ router.post(
   auth,
   upload,
   check('project_name', 'Project name is required').notEmpty(),
+  check('project_name_ua', 'Project name in Ukrainian is required').notEmpty(),
+  check('project_name_fr', 'Project name in French is required').notEmpty(),
+
   check('project_short_text', 'Short text is required').notEmpty(),
+  check(
+    'project_short_text_ua',
+    'Short text in Ukrainian is required'
+  ).notEmpty(),
+  check('project_short_text_fr', 'Short text in French is required').notEmpty(),
+
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -76,7 +85,7 @@ router.post(
       }
     }
 
-    const newPost = {
+    const newProject = {
       id,
       project_name,
       project_name_ua,
@@ -87,17 +96,12 @@ router.post(
       project_text,
       project_text_ua,
       project_text_fr,
-
-      post_title,
-      post_short_text,
-      post_text,
-      post_images,
-      post_status,
-      post_published_date,
-      post_author,
+      project_technologies,
+      project_link,
+      project_images,
     };
 
-    console.log(newPost);
+    console.log(newProject);
     // Post a new post
     connectDBMySQL.getConnection((err, connection) => {
       if (err) {
@@ -105,19 +109,24 @@ router.post(
         return res.status(500).json({ error: 'Database error 1' });
       }
 
-      const addNewPost =
-        'INSERT INTO posts (id, post_author, post_title, post_short_text, post_text, post_images, post_status, post_published_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+      const addNewProject =
+        'INSERT INTO posts (id, project_name, project_name_ua, project_name_fr, project_short_text, project_short_text_ua, project_short_text_fr, project_text, project_text_ua, project_text_fr, project_technologies, project_link, project_images,) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
       connection.query(
-        addNewPost,
+        addNewProject,
         [
           id,
-          post_author,
-          post_title,
-          post_short_text,
-          post_text,
-          post_images,
-          post_status,
-          post_published_date,
+          project_name,
+          project_name_ua,
+          project_name_fr,
+          project_short_text,
+          project_short_text_ua,
+          project_short_text_fr,
+          project_text,
+          project_text_ua,
+          project_text_fr,
+          project_technologies,
+          project_link,
+          project_images,
         ],
         (err, results) => {
           connection.release();
@@ -132,7 +141,7 @@ router.post(
 
           results = {
             message: 'You successfully added a new post!',
-            newPost: newPost,
+            newProject: newProject,
           };
 
           res.json(results);
