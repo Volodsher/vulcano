@@ -161,8 +161,8 @@ router.get('/', (req, res) => {
       return res.status(500).json({ error: 'Database error 3' });
     }
 
-    const getAllPosts = 'SELECT * FROM posts ORDER BY post_published_date ASC';
-    connection.query(getAllPosts, (err, rows) => {
+    const getAllProjects = 'SELECT * FROM projects ORDER BY order ASC';
+    connection.query(getAllProjects, (err, rows) => {
       connection.release();
 
       if (err) {
@@ -202,8 +202,8 @@ router.get('/:id', (req, res) => {
       return res.status(500).json({ error: 'Database error 4' });
     }
 
-    const getOnePosts = `SELECT * FROM posts WHERE id = ?`;
-    connection.query(getOnePosts, [req.params.id], (err, rows) => {
+    const getOneProject = `SELECT * FROM projects WHERE id = ?`;
+    connection.query(getOneProject, [req.params.id], (err, rows) => {
       connection.release();
 
       if (err) {
