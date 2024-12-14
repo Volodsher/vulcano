@@ -151,8 +151,8 @@ router.post(
   }
 );
 
-// @route  GET api/posts
-// @desc   Get all posts
+// @route  GET api/projects
+// @desc   Get all projects
 // @access Public
 router.get('/', (req, res) => {
   connectDBMySQL.getConnection((err, connection) => {
@@ -252,8 +252,8 @@ router.delete('/:id', auth, (req, res) => {
       return res.status(500).json({ error: 'Database error 6' });
     }
 
-    const checkPostQuery = 'SELECT 1 FROM posts WHERE id = ? LIMIT 1';
-    connection.query(checkPostQuery, [req.params.id], (err, rows) => {
+    const checkProjectQuery = 'SELECT 1 FROM projects WHERE id = ? LIMIT 1';
+    connection.query(checkProjectQuery, [req.params.id], (err, rows) => {
       if (err) {
         console.error(err);
         connection.release();
@@ -263,11 +263,10 @@ router.delete('/:id', auth, (req, res) => {
       if (rows.length === 0) {
         connection.release();
         return res.status(400).json({
-          errors: [{ msg: "Post with such name doesn't exists" }],
+          errors: [{ msg: "Project with such name doesn't exists" }],
         });
       }
 
-      console.log(req.body, 'here you go');
       if (req.body.image) {
         fs.unlink(`./uploads/blog/${req.body.image}`, (err) => {
           if (err) throw err;
@@ -295,8 +294,8 @@ router.delete('/:id', auth, (req, res) => {
         );
       }
 
-      const deletePost = 'DELETE FROM posts WHERE id = ?';
-      connection.query(deletePost, [id], (err, results) => {
+      const deleteProject = 'DELETE FROM projects WHERE id = ?';
+      connection.query(deleteProject, [id], (err, results) => {
         connection.release();
 
         if (err) {
@@ -304,7 +303,7 @@ router.delete('/:id', auth, (req, res) => {
           return res.status(500).json({ error: 'Database error 8' });
         }
 
-        results.message = 'You successfully deleted a post!';
+        results.message = 'You successfully deleted a project!';
         res.json(results.message);
       });
     });
@@ -344,8 +343,8 @@ router.put('/:id', auth, async (req, res) => {
       return res.status(500).json({ error: 'Database error 9' });
     }
 
-    const checkPostQuery = 'SELECT 1 FROM posts WHERE id = ? LIMIT 1';
-    connection.query(checkPostQuery, [req.params.id], (err, rows) => {
+    const checkProjectQuery = 'SELECT 1 FROM projects WHERE id = ? LIMIT 1';
+    connection.query(checkProjectQuery, [req.params.id], (err, rows) => {
       if (err) {
         console.error(err);
         connection.release();
@@ -355,7 +354,7 @@ router.put('/:id', auth, async (req, res) => {
       if (rows.length === 0) {
         connection.release();
         return res.status(400).json({
-          errors: [{ msg: "Post with such name doesn't exists" }],
+          errors: [{ msg: "Project with such name doesn't exists" }],
         });
       }
 
@@ -364,7 +363,7 @@ router.put('/:id', auth, async (req, res) => {
       const id = req.params.id;
       const { title, text, image, date } = req.body;
 
-      const updatedPost = {
+      const updatedProject = {
         id,
         title,
         text,
@@ -374,11 +373,11 @@ router.put('/:id', auth, async (req, res) => {
         edit_date,
       };
 
-      const updatePost =
+      const updateProject =
         'UPDATE posts SET title = ?, text = ?, image = ?, date = ?, edited = ?, edit_date = ? WHERE id = ?;';
 
       connection.query(
-        updatePost,
+        updateProject,
         [title, text, image, date, edited, edit_date, id],
         (err, results) => {
           connection.release();
@@ -390,7 +389,7 @@ router.put('/:id', auth, async (req, res) => {
           // console.log(results);
           // results.message = `You just edited post: ${title}`;
           // res.json(results.message);
-          res.json(updatedPost);
+          res.json(updatedProject);
         }
       );
     });
