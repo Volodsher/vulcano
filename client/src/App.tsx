@@ -8,7 +8,8 @@ import BrandLogos from './features/components/BrandLogos';
 import Contact from './features/components/Contact';
 import Footer from './features/components/Footer';
 import logo from './images/vulcanoWhite.png';
-import Blog from './blog/Blog';
+
+import BlogSmall from './features/components/BlogSmall';
 
 import './App.css';
 
@@ -50,7 +51,7 @@ function App() {
         <Menu changeMenuStatus={togleMenu} menuOpen={menuStatus} />
         <Banner />
         <About />
-        <Blog />
+        <BlogSmall />
         <Projects />
         <BrandLogos />
         <Contact />

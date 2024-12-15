@@ -365,12 +365,18 @@ router.put('/:id', auth, async (req, res) => {
 
       const updatedProject = {
         id,
-        title,
-        text,
-        image,
-        date,
-        edited,
-        edit_date,
+        project_name,
+        project_name_ua,
+        project_name_fr,
+        project_short_text,
+        project_short_text_ua,
+        project_short_text_fr,
+        project_text,
+        project_text_ua,
+        project_text_fr,
+        project_technologies,
+        project_link,
+        project_images,
       };
 
       const updateProject =
