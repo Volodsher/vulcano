@@ -61,6 +61,7 @@ router.post(
       project_link,
     } = req.body;
     const id = uuidv4();
+    let project_images = '{}';
 
     if (req.file) {
       console.log(req.file);
@@ -110,7 +111,7 @@ router.post(
       }
 
       const addNewProject =
-        'INSERT INTO posts (id, project_name, project_name_ua, project_name_fr, project_short_text, project_short_text_ua, project_short_text_fr, project_text, project_text_ua, project_text_fr, project_technologies, project_link, project_images,) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        'INSERT INTO projects (id, project_name, project_name_ua, project_name_fr, project_short_text, project_short_text_ua, project_short_text_fr, project_text, project_text_ua, project_text_fr, project_technologies, project_link, project_images) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
       connection.query(
         addNewProject,
         [
@@ -167,7 +168,7 @@ router.get('/', (req, res) => {
 
       if (err) {
         console.error(err);
-        return res.status(500).json({ error: 'Database error 2' });
+        return res.status(500).json({ error: 'Database error 4' });
       }
 
       res.send(rows);
@@ -199,7 +200,7 @@ router.get('/:id', (req, res) => {
   connectDBMySQL.getConnection((err, connection) => {
     if (err) {
       console.error(err);
-      return res.status(500).json({ error: 'Database error 4' });
+      return res.status(500).json({ error: 'Database error 5' });
     }
 
     const getOneProject = `SELECT * FROM projects WHERE id = ?`;
@@ -208,7 +209,7 @@ router.get('/:id', (req, res) => {
 
       if (err) {
         console.error(err);
-        return res.status(500).json({ error: 'Database error 5' });
+        return res.status(500).json({ error: 'Database error 6' });
       }
 
       res.send(rows);
@@ -222,7 +223,7 @@ router.delete('/:id', auth, (req, res) => {
   connectDBMySQL.getConnection((err, connection) => {
     if (err) {
       console.error(err);
-      return res.status(500).json({ error: 'Database error 6' });
+      return res.status(500).json({ error: 'Database error 7' });
     }
 
     const checkProjectQuery = 'SELECT 1 FROM projects WHERE id = ? LIMIT 1';
@@ -230,7 +231,7 @@ router.delete('/:id', auth, (req, res) => {
       if (err) {
         console.error(err);
         connection.release();
-        return res.status(500).json({ error: 'Database error 7' });
+        return res.status(500).json({ error: 'Database error 8' });
       }
 
       if (rows.length === 0) {
@@ -273,7 +274,7 @@ router.delete('/:id', auth, (req, res) => {
 
         if (err) {
           console.error(err);
-          return res.status(500).json({ error: 'Database error 8' });
+          return res.status(500).json({ error: 'Database error 9' });
         }
 
         results.message = 'You successfully deleted a project!';
@@ -288,7 +289,7 @@ router.put('/:id', auth, async (req, res) => {
   connectDBMySQL.getConnection((err, connection) => {
     if (err) {
       console.log(err);
-      return res.status(500).json({ error: 'Database error 9' });
+      return res.status(500).json({ error: 'Database error 10' });
     }
 
     const checkProjectQuery = 'SELECT 1 FROM projects WHERE id = ? LIMIT 1';
@@ -351,3 +352,15 @@ router.put('/:id', auth, async (req, res) => {
 });
 
 module.exports = router;
+
+// "project_name": "",
+// "project_name_ua": "",
+// "project_name_fr": "",
+// "project_short_text": "",
+// "project_short_text_ua": "",
+// "project_short_text_fr": "",
+// "project_text": "",
+// "project_text_ua": "",
+// "project_text_fr": "",
+// "project_technologies": "",
+// "project_link": ""
