@@ -61,8 +61,12 @@ router.post(
       project_link,
     } = req.body;
     const id = uuidv4();
-    let project_images = '{}';
 
+    let project_images = '{}';
+    if (req.body.project_images) {
+      project_images = JSON.stringify(req.body.project_images);
+    }
+    console.log(project_images);
     if (req.file) {
       console.log(req.file);
       try {
