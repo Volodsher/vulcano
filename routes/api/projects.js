@@ -369,15 +369,9 @@ module.exports = router;
 // "project_technologies": "",
 // "project_link": ""
 
-
-
-
-
-
-
-"project_text": "This is about first, This is about first, This is about first",
-"project_text_ua": "Це про перший Це про перший Це про перший",
-"project_text_fr": "Ce pro perschyi Ce pro perschyi Ce pro perschyi ",
-"project_technologies": "react and others",
-"project_link": "www://sdfs.com",
-"project_images": {"two": "sdfssdf"}
+// "project_text": "This is about first, This is about first, This is about first",
+// "project_text_ua": "Це про перший Це про перший Це про перший",
+// "project_text_fr": "Ce pro perschyi Ce pro perschyi Ce pro perschyi ",
+// "project_technologies": "react and others",
+// "project_link": "www://sdfs.com",
+// "project_images": {"two": "sdfssdf"}
