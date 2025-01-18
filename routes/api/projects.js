@@ -23,6 +23,12 @@ const upload = multer({
   limits: { fileSize: 2000000 },
 }).single('file');
 
+// post
+// get
+// edit
+// delete
+// get only one post???
+
 // @route  POST api/projects
 // @desc   Create a projects
 // @access Private
@@ -76,7 +82,6 @@ router.post(
           .toBuffer();
 
         // Save or upload the resized image with width 800px
-        // Example: fs.writeFileSync('path/to/save/resizedImage800.jpg', resizedImage800Buffer);
         fs.writeFileSync(
           `./uploads/projects/${image.substring(0, image.length - 4)}800.jpg`,
           resizedImage800Buffer
@@ -140,9 +145,6 @@ router.post(
             console.error(err);
             return res.status(500).json({ error: 'Database error 2' });
           }
-          // results.message = 'You successfully added a new post!';
-          // res.json(results.message);
-          // // res.json(newPost);
 
           results = {
             message: 'You successfully added a new post!',
@@ -180,26 +182,10 @@ router.get('/', (req, res) => {
   });
 });
 
-// @route   GET api/posts/:id
+// @route   GET api/posts/:id if I really need it
 // @dexc    Get post by ID
 // @access  Private
-// Old version with MongoDB
-// router.get('/:id', async (req, res) => {
-// try {
-//   const post = await Post.findById(req.params.id);
 
-//   if (!post) {
-//     return res.status(404).json({ msg: 'Post not found' });
-//   }
-//   res.json(post);
-// } catch (error) {
-//   console.error(error.message);
-//   if (error.kind === 'ObjectId') {
-//     return res.status(404).json({ msg: 'Post not found' });
-//   }
-//   res.status(500).send('Server Error');
-// }
-// });
 router.get('/:id', (req, res) => {
   connectDBMySQL.getConnection((err, connection) => {
     if (err) {
@@ -221,6 +207,9 @@ router.get('/:id', (req, res) => {
   });
 });
 
+// @route   DELETE api/posts/:id
+// @dexc    Delete a post by ID
+// @access  Private
 router.delete('/:id', auth, (req, res) => {
   const { id } = req.params;
 
@@ -288,6 +277,9 @@ router.delete('/:id', auth, (req, res) => {
   });
 });
 
+// @route   UPDATE api/posts/:id
+// @dexc    Update a post by ID
+// @access  Private
 router.put('/:id', auth, async (req, res) => {
   // let post = await Post.findById(req.params.id);
   connectDBMySQL.getConnection((err, connection) => {
