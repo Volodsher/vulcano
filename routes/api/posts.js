@@ -200,26 +200,6 @@ router.get('/', (req, res) => {
   });
 });
 
-// @route   GET api/posts/:id
-// @dexc    Get post by ID
-// @access  Private
-// Old version with MongoDB
-// router.get('/:id', async (req, res) => {
-// try {
-//   const post = await Post.findById(req.params.id);
-
-//   if (!post) {
-//     return res.status(404).json({ msg: 'Post not found' });
-//   }
-//   res.json(post);
-// } catch (error) {
-//   console.error(error.message);
-//   if (error.kind === 'ObjectId') {
-//     return res.status(404).json({ msg: 'Post not found' });
-//   }
-//   res.status(500).send('Server Error');
-// }
-// });
 router.get('/:id', (req, res) => {
   connectDBMySQL.getConnection((err, connection) => {
     if (err) {
