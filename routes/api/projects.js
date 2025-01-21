@@ -53,6 +53,9 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
+    let project_text = '123onetwothree';
+    console.log(project_text);
+
     const {
       project_name,
       project_name_ua,
@@ -60,12 +63,14 @@ router.post(
       project_short_text,
       project_short_text_ua,
       project_short_text_fr,
-      project_text,
+      // project_text,
       project_text_ua,
       project_text_fr,
       project_technologies,
       project_link,
     } = req.body;
+
+    console.log(`this is project text: ${project_text}`);
     const id = uuidv4();
 
     let project_images = '{}';
