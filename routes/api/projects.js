@@ -53,8 +53,17 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    let project_text = '123onetwothree';
-    console.log(project_text);
+    let project_text = req.body.project_text ? req.body.project_text : '';
+    let project_text_ua = req.body.project_text_ua
+      ? req.body.project_text_ua
+      : '';
+    let project_text_fr = req.body.project_text_fr
+      ? req.body.project_text_fr
+      : '';
+    let project_technologies = req.body.project_technologies
+      ? req.body.project_technologies
+      : '';
+    let project_link = req.body.project_link ? req.body.project_link : '';
 
     const {
       project_name,
@@ -64,13 +73,12 @@ router.post(
       project_short_text_ua,
       project_short_text_fr,
       // project_text,
-      project_text_ua,
-      project_text_fr,
-      project_technologies,
-      project_link,
+      // project_text_ua,
+      // project_text_fr,
+      // project_technologies,
+      // project_link,
     } = req.body;
 
-    console.log(`this is project text: ${project_text}`);
     const id = uuidv4();
 
     let project_images = '{}';
