@@ -53,6 +53,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
+    let projects_order = req.body.projects_order ? req.body.projects_order : 0;
     let project_text = req.body.project_text ? req.body.project_text : '';
     let project_text_ua = req.body.project_text_ua
       ? req.body.project_text_ua
@@ -72,11 +73,6 @@ router.post(
       project_short_text,
       project_short_text_ua,
       project_short_text_fr,
-      // project_text,
-      // project_text_ua,
-      // project_text_fr,
-      // project_technologies,
-      // project_link,
     } = req.body;
 
     const id = uuidv4();
@@ -110,6 +106,7 @@ router.post(
 
     const newProject = {
       id,
+      projects_order,
       project_name,
       project_name_ua,
       project_name_fr,
@@ -133,11 +130,12 @@ router.post(
       }
 
       const addNewProject =
-        'INSERT INTO projects (id, project_name, project_name_ua, project_name_fr, project_short_text, project_short_text_ua, project_short_text_fr, project_text, project_text_ua, project_text_fr, project_technologies, project_link, project_images) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
+        'INSERT INTO projects (id, projects_order, project_name, project_name_ua, project_name_fr, project_short_text, project_short_text_ua, project_short_text_fr, project_text, project_text_ua, project_text_fr, project_technologies, project_link, project_images) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);';
       connection.query(
         addNewProject,
         [
           id,
+          projects_order,
           project_name,
           project_name_ua,
           project_name_fr,
@@ -181,7 +179,7 @@ router.get('/', (req, res) => {
       return res.status(500).json({ error: 'Database error 3' });
     }
 
-    const getAllProjects = 'SELECT * FROM projects ORDER BY order ASC';
+    const getAllProjects = 'SELECT * FROM projects ORDER BY projects_order ASC';
     connection.query(getAllProjects, (err, rows) => {
       connection.release();
 
