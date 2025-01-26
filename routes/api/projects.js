@@ -193,8 +193,8 @@ router.get('/', (req, res) => {
   });
 });
 
-// @route   GET api/posts/:id if I really need it
-// @dexc    Get post by ID
+// @route   GET api/projects/:id if I really need it
+// @dexc    Get projects by ID
 // @access  Private
 
 router.get('/:id', (req, res) => {
@@ -218,7 +218,7 @@ router.get('/:id', (req, res) => {
   });
 });
 
-// @route   DELETE api/posts/:id
+// @route   DELETE api/projects/:id
 // @dexc    Delete a post by ID
 // @access  Private
 router.delete('/:id', auth, (req, res) => {
@@ -245,6 +245,7 @@ router.delete('/:id', auth, (req, res) => {
         });
       }
 
+      // to delete images
       if (req.body.image) {
         fs.unlink(`./uploads/blog/${req.body.image}`, (err) => {
           if (err) throw err;
@@ -288,7 +289,7 @@ router.delete('/:id', auth, (req, res) => {
   });
 });
 
-// @route   UPDATE api/posts/:id
+// @route   UPDATE api/projects/:id
 // @dexc    Update a post by ID
 // @access  Private
 router.put('/:id', auth, async (req, res) => {
