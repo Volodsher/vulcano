@@ -321,7 +321,7 @@ router.put('/:id', auth, async (req, res) => {
       const { title, text, image, date } = req.body;
 
       const updatedProject = {
-        id,
+        projects_order,
         project_name,
         project_name_ua,
         project_name_fr,
@@ -337,7 +337,7 @@ router.put('/:id', auth, async (req, res) => {
       };
 
       const updateProject =
-        'UPDATE posts SET title = ?, text = ?, image = ?, date = ?, edited = ?, edit_date = ? WHERE id = ?;';
+        'UPDATE projects SET projects_order = ?, project_name =?, project_name_ua = ?, project_name_fr = ?, project_short_text = ?, project_short_text_ua = ?, project_short_text_fr = ?, project_text = ?, project_text_ua = ?, project_text_fr = ?, project_technologies = ?, project_link = ?, project_images = ? WHERE id = ?;';
 
       connection.query(
         updateProject,
