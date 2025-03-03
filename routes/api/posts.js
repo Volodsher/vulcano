@@ -224,30 +224,6 @@ router.get('/:id', (req, res) => {
 // @route DELETE api/posts/:id
 // @desc Delete a post
 // @access Private
-// Old version with MongoDB
-// router.delete('/:id', auth, async (req, res) => {
-//   try {
-//     const post = await Post.findById(req.params.id);
-
-//     if (!post) {
-//       return res.status(404).json({ msg: 'Post not found' });
-//     }
-
-//     // Check user
-//     const user = await User.findById(req.user.id).select('-password');
-//     if (user.status !== 'superuser') {
-//       return res.status(401).json({ msg: 'User not authorized' });
-//     }
-
-//     // Remove post
-//     await post.remove();
-
-//     res.json({ msg: 'Post removed' });
-//   } catch (error) {
-//     console.error(error.message);
-//     res.status(500).send('Server Error');
-//   }
-// });
 router.delete('/:id', auth, (req, res) => {
   const { id } = req.params;
 
@@ -319,30 +295,7 @@ router.delete('/:id', auth, (req, res) => {
 // @route PUT api/posts/:id
 // @desc Edit a post
 // @access Private
-// Old version with MongoDB
-// router.put('/:id', auth, async (req, res) => {
-//   let post = await Post.findById(req.params.id);
-
-//   if (!post) {
-//     return res.status(404).json({ msg: 'Post not found' });
-//   }
-
-//   // Check user
-//   const user = await User.findById(req.user.id).select('-password');
-//   if (user.status !== 'superuser') {
-//     return res.status(401).json({ msg: 'User not authorized' });
-//   }
-
-//   // Edit the post
-//   const { title, text, image } = req.body;
-//   Object.assign(post, { title, text, image });
-
-//   await post.save();
-
-//   res.json(post);
-// });
 router.put('/:id', auth, async (req, res) => {
-  // let post = await Post.findById(req.params.id);
   connectDBMySQL.getConnection((err, connection) => {
     if (err) {
       console.log(err);
