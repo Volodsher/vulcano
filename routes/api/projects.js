@@ -23,12 +23,6 @@ const upload = multer({
   limits: { fileSize: 2000000 },
 }).single('file');
 
-// post
-// get
-// edit
-// delete
-// get only one post???
-
 // @route  POST api/projects
 // @desc   Create a projects
 // @access Private
@@ -81,7 +75,7 @@ router.post(
     if (req.body.project_images) {
       project_images = JSON.stringify(req.body.project_images);
     }
-    console.log(project_images);
+
     if (req.file) {
       console.log(req.file);
       try {
@@ -292,90 +286,152 @@ router.delete('/:id', auth, (req, res) => {
 // @route   UPDATE api/projects/:id
 // @dexc    Update a post by ID
 // @access  Private
-router.put('/:id', auth, async (req, res) => {
-  // let post = await Post.findById(req.params.id);
-  connectDBMySQL.getConnection((err, connection) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({ error: 'Database error 10' });
+router.put(
+  '/:id',
+  auth,
+  upload,
+  check('project_name', 'Project name is required').notEmpty(),
+  check('project_name_ua', 'Project name in Ukrainian is required').notEmpty(),
+  check('project_name_fr', 'Project name in French is required').notEmpty(),
+  check('project_short_text', 'Short text is required').notEmpty(),
+  check(
+    'project_short_text_ua',
+    'Short text in Ukrainian is required'
+  ).notEmpty(),
+  check('project_short_text_fr', 'Short text in French is required').notEmpty(),
+
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
 
-    const checkProjectQuery = 'SELECT 1 FROM projects WHERE id = ? LIMIT 1';
-    connection.query(checkProjectQuery, [req.params.id], (err, rows) => {
+    let projects_order = req.body.projects_order ? req.body.projects_order : 0;
+    let project_text = req.body.project_text ? req.body.project_text : '';
+    let project_text_ua = req.body.project_text_ua
+      ? req.body.project_text_ua
+      : '';
+    let project_text_fr = req.body.project_text_fr
+      ? req.body.project_text_fr
+      : '';
+    let project_technologies = req.body.project_technologies
+      ? req.body.project_technologies
+      : '';
+    let project_link = req.body.project_link ? req.body.project_link : '';
+
+    const { id } = req.params;
+    const {
+      project_name,
+      project_name_ua,
+      project_name_fr,
+      project_short_text,
+      project_short_text_ua,
+      project_short_text_fr,
+    } = req.body;
+    // let post = await Post.findById(req.params.id);
+
+    let project_images = '{}';
+    if (req.body.project_images) {
+      project_images = JSON.stringify(req.body.project_images);
+    }
+
+    if (req.file) {
+      console.log(req.file);
+      try {
+        // Resize image to width 800px
+        const resizedImage800Buffer = await sharp(req.file.path)
+          .resize({ width: 800 })
+          .toBuffer();
+
+        // Save or upload the resized image with width 800px
+        fs.writeFileSync(
+          `./uploads/projects/${image.substring(0, image.length - 4)}800.jpg`,
+          resizedImage800Buffer
+        );
+
+        // Add the resized images to the newPost object or update the image field with their base64 representation
+        // newPost.image800 = resizedImage800Buffer.toString('base64');
+      } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Error resizing image' });
+      }
+    }
+
+    connectDBMySQL.getConnection((err, connection) => {
       if (err) {
-        console.error(err);
-        connection.release();
-        return res.status(500).json({ error: 'Database rorror 10' });
+        console.log(err);
+        return res.status(500).json({ error: 'Database error 10' });
       }
 
-      if (rows.length === 0) {
-        connection.release();
-        return res.status(400).json({
-          errors: [{ msg: "Project with such name doesn't exists" }],
-        });
-      }
-
-      const edit_date = new Date().toJSON().slice(0, 10);
-      const edited = true;
-      const id = req.params.id;
-      const { title, text, image, date } = req.body;
-
-      const updatedProject = {
-        projects_order,
-        project_name,
-        project_name_ua,
-        project_name_fr,
-        project_short_text,
-        project_short_text_ua,
-        project_short_text_fr,
-        project_text,
-        project_text_ua,
-        project_text_fr,
-        project_technologies,
-        project_link,
-        project_images,
-      };
-
-      const updateProject =
-        'UPDATE projects SET projects_order = ?, project_name =?, project_name_ua = ?, project_name_fr = ?, project_short_text = ?, project_short_text_ua = ?, project_short_text_fr = ?, project_text = ?, project_text_ua = ?, project_text_fr = ?, project_technologies = ?, project_link = ?, project_images = ? WHERE id = ?;';
-
-      connection.query(
-        updateProject,
-        [title, text, image, date, edited, edit_date, id],
-        (err, results) => {
+      const checkProjectQuery = 'SELECT 1 FROM projects WHERE id = ? LIMIT 1';
+      connection.query(checkProjectQuery, id, (err, rows) => {
+        if (err) {
+          console.error(err);
           connection.release();
-
-          if (err) {
-            console.log(err);
-            return res.status(500).json({ error: 'Database error 11' });
-          }
-          // console.log(results);
-          // results.message = `You just edited post: ${title}`;
-          // res.json(results.message);
-          res.json(updatedProject);
+          return res.status(500).json({ error: 'Database rorror 10' });
         }
-      );
+
+        if (rows.length === 0) {
+          connection.release();
+          return res.status(400).json({
+            errors: [{ msg: "Project with such name doesn't exist" }],
+          });
+        }
+
+        const updatedProject = {
+          projects_order,
+          project_name,
+          project_name_ua,
+          project_name_fr,
+          project_short_text,
+          project_short_text_ua,
+          project_short_text_fr,
+          project_text,
+          project_text_ua,
+          project_text_fr,
+          project_technologies,
+          project_link,
+          project_images,
+        };
+
+        console.log(updatedProject);
+
+        const toUpdateProject =
+          'UPDATE projects SET projects_order = ?, project_name =?, project_name_ua = ?, project_name_fr = ?, project_short_text = ?, project_short_text_ua = ?, project_short_text_fr = ?, project_text = ?, project_text_ua = ?, project_text_fr = ?, project_technologies = ?, project_link = ?, project_images = ? WHERE id = ?;';
+
+        connection.query(
+          toUpdateProject,
+          [
+            projects_order,
+            project_name,
+            project_name_ua,
+            project_name_fr,
+            project_short_text,
+            project_short_text_ua,
+            project_short_text_fr,
+            project_text,
+            project_text_ua,
+            project_text_fr,
+            project_technologies,
+            project_link,
+            project_images,
+            id,
+          ],
+          (err, results) => {
+            if (err) {
+              console.log(err);
+              return res.status(500).json({ error: 'Database error 11' });
+            }
+            connection.release();
+
+            results.message = `You just edited post: ${project_name}`;
+
+            res.json(results.message);
+          }
+        );
+      });
     });
-  });
-});
+  }
+);
 
 module.exports = router;
-
-// "project_name": "",
-// "project_name_ua": "",
-// "project_name_fr": "",
-// "project_short_text": "",
-// "project_short_text_ua": "",
-// "project_short_text_fr": "",
-// "project_text": "",
-// "project_text_ua": "",
-// "project_text_fr": "",
-// "project_technologies": "",
-// "project_link": ""
-
-// "project_text": "This is about first, This is about first, This is about first",
-// "project_text_ua": "Це про перший Це про перший Це про перший",
-// "project_text_fr": "Ce pro perschyi Ce pro perschyi Ce pro perschyi ",
-// "project_technologies": "react and others",
-// "project_link": "www://sdfs.com",
-// "project_images": {"two": "sdfssdf"}
