@@ -166,9 +166,6 @@ router.post(
             console.error(err);
             return res.status(500).json({ error: 'Database error 2' });
           }
-          // results.message = 'You successfully added a new post!';
-          // res.json(results.message);
-          // // res.json(newPost);
 
           results = {
             message: 'You successfully added a new post!',
@@ -339,11 +336,8 @@ router.put(
           });
         }
 
-        const post_edited_time = new Date().toJSON().slice(0, 10);
         const id = req.params.id;
-        const postUserId = req.user.id;
 
-        console.log('thisis it something: ' + req.body.post_status);
         const updatedPost = {
           post_title: req.body.post_title ?? '',
           post_title_ua: req.body.post_title_ua ?? '',
@@ -351,6 +345,7 @@ router.put(
           post_text: req.body.post_text ?? '',
           post_text_ua: req.body.post_text_ua ?? '',
           post_text_fr: req.body.post_text_fr ?? '',
+          post_short_text: req.body.post_short_text ?? '',
           post_short_text_ua: req.body.post_short_text_ua ?? '',
           post_short_text_fr: req.body.post_short_text_fr ?? '',
           post_images: req.body.post_images ?? '[]',
@@ -358,39 +353,12 @@ router.put(
           id,
         };
 
-        console.log('thisis it something: ' + updatedPost.post_images);
-        console.log('thisis it something: ' + updatedPost.id);
-        // const {
-        //   post_title,
-        //   post_title_ua,
-        //   post_title_fr,
-        //   post_text,
-        //   post_text_ua,
-        //   post_text_fr,
-        //   post_short_text_ua,
-        //   post_short_text_fr,
-        //   post_images,
-        //   post_status,
-        // } = req.body;
-
-        // res.json(rows);
-        // const updatedPost = {
-        //   id,
-        //   title,
-        //   text,
-        //   image,
-        //   date,
-        //   edited,
-        //   edit_date,
-        // };
-
         const toUpdatePost =
-          'UPDATE posts SET post_title = ?, post_title_ua = ?, post_title_fr = ?, post_short_text = ?, post_short_text_ua = ?, post_short_text_fr = ?, post_text = ?, post_text_ua = ?, post_text_fr = ?, post_images = ?, post_status = ?, post_published_date = ?, post_author = ? WHERE id = ?;';
+          'UPDATE posts SET post_title = ?, post_title_ua = ?, post_title_fr = ?, post_text = ?, post_text_ua = ?, post_text_fr = ?, post_short_text = ?, post_short_text_ua = ?, post_short_text_fr = ?, post_images = ?, post_status = ? WHERE id = ?;';
 
         connection.query(
           toUpdatePost,
           [...Object.values(updatedPost), id],
-          //   [title, text, image, date, edited, edit_date, id],
           (err, results) => {
             connection.release();
 
@@ -398,33 +366,14 @@ router.put(
               console.log(err);
               return res.status(500).json({ error: 'Database error 11' });
             }
-            // console.log(results);
-            // results.message = `You just edited post: ${title}`;
-            // res.json(results.message);
-            res.json(updatedPost);
+
+            results.message = `You just edited post: ${updatedPost.post_title}`;
+            res.json(results.message);
           }
         );
       });
     });
-    // if (!post) {
-    //   return res.status(404).json({ msg: 'Post not found' });
-    // }
-
-    // // Check user
-    // const user = await User.findById(req.user.id).select('-password');
-    // if (user.status !== 'superuser') {
-    //   return res.status(401).json({ msg: 'User not authorized' });
-    // }
-
-    // // Edit the post
-    // const { title, text, image } = req.body;
-    // Object.assign(post, { title, text, image });
-
-    // await post.save();
-
-    // res.json(post);
   }
 );
 
 module.exports = router;
-// export default router;
