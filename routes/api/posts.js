@@ -140,18 +140,24 @@ router.post(
       }
 
       const addNewPost =
-        'INSERT INTO posts (id, post_author, post_title, post_short_text, post_text, post_images, post_status, post_published_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+        'INSERT INTO posts (id, post_title, post_title_ua, post_title_fr, post_short_text, post_short_text_ua, post_short_text_fr, post_text, post_text_ua, post_text_fr, post_images, post_status, post_published_date, post_author) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
       connection.query(
         addNewPost,
         [
           id,
-          post_author,
           post_title,
+          post_title_ua,
+          post_title_fr,
           post_short_text,
+          post_short_text_ua,
+          post_short_text_fr,
           post_text,
+          post_text_ua,
+          post_text_fr,
           post_images,
           post_status,
           post_published_date,
+          post_author,
         ],
         (err, results) => {
           connection.release();
@@ -295,82 +301,130 @@ router.delete('/:id', auth, (req, res) => {
 // @route PUT api/posts/:id
 // @desc Edit a post
 // @access Private
-router.put('/:id', auth, async (req, res) => {
-  connectDBMySQL.getConnection((err, connection) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({ error: 'Database error 9' });
+router.put(
+  '/:id',
+  upload,
+  check('post_title', 'Title is required').notEmpty(),
+  check('post_title_ua', 'UA Title is required').notEmpty(),
+  check('post_title_fr', 'FR Title is required').notEmpty(),
+
+  check('post_text', 'Text is required').notEmpty(),
+  check('post_text_ua', 'UA Text is required').notEmpty(),
+  check('post_text_fr', 'FR Text is required').notEmpty(),
+  auth,
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
 
-    const checkPostQuery = 'SELECT 1 FROM posts WHERE id = ? LIMIT 1';
-    connection.query(checkPostQuery, [req.params.id], (err, rows) => {
+    connectDBMySQL.getConnection((err, connection) => {
       if (err) {
-        console.error(err);
-        connection.release();
-        return res.status(500).json({ error: 'Database rorror 10' });
+        console.log(err);
+        return res.status(500).json({ error: 'Database error 9' });
       }
 
-      if (rows.length === 0) {
-        connection.release();
-        return res.status(400).json({
-          errors: [{ msg: "Post with such name doesn't exists" }],
-        });
-      }
-
-      const edit_date = new Date().toJSON().slice(0, 10);
-      const edited = true;
-      const id = req.params.id;
-      const { title, text, image, date } = req.body;
-
-      const updatedPost = {
-        id,
-        title,
-        text,
-        image,
-        date,
-        edited,
-        edit_date,
-      };
-
-      const updatePost =
-        'UPDATE posts SET title = ?, text = ?, image = ?, date = ?, edited = ?, edit_date = ? WHERE id = ?;';
-
-      connection.query(
-        updatePost,
-        [title, text, image, date, edited, edit_date, id],
-        (err, results) => {
+      const checkPostQuery = 'SELECT 1 FROM posts WHERE id = ? LIMIT 1';
+      connection.query(checkPostQuery, [req.params.id], (err, rows) => {
+        if (err) {
+          console.error(err);
           connection.release();
-
-          if (err) {
-            console.log(err);
-            return res.status(500).json({ error: 'Database error 11' });
-          }
-          // console.log(results);
-          // results.message = `You just edited post: ${title}`;
-          // res.json(results.message);
-          res.json(updatedPost);
+          return res.status(500).json({ error: 'Database rorror 10' });
         }
-      );
+
+        if (rows.length === 0) {
+          connection.release();
+          return res.status(400).json({
+            errors: [{ msg: "Post with such name doesn't exists" }],
+          });
+        }
+
+        const post_edited_time = new Date().toJSON().slice(0, 10);
+        const id = req.params.id;
+        const postUserId = req.user.id;
+
+        console.log('thisis it something: ' + req.body.post_status);
+        const updatedPost = {
+          post_title: req.body.post_title ?? '',
+          post_title_ua: req.body.post_title_ua ?? '',
+          post_title_fr: req.body.post_title_fr ?? '',
+          post_text: req.body.post_text ?? '',
+          post_text_ua: req.body.post_text_ua ?? '',
+          post_text_fr: req.body.post_text_fr ?? '',
+          post_short_text_ua: req.body.post_short_text_ua ?? '',
+          post_short_text_fr: req.body.post_short_text_fr ?? '',
+          post_images: req.body.post_images ?? '[]',
+          post_status: req.body.post_status ?? null,
+          id,
+        };
+
+        console.log('thisis it something: ' + updatedPost.post_images);
+        console.log('thisis it something: ' + updatedPost.id);
+        // const {
+        //   post_title,
+        //   post_title_ua,
+        //   post_title_fr,
+        //   post_text,
+        //   post_text_ua,
+        //   post_text_fr,
+        //   post_short_text_ua,
+        //   post_short_text_fr,
+        //   post_images,
+        //   post_status,
+        // } = req.body;
+
+        // res.json(rows);
+        // const updatedPost = {
+        //   id,
+        //   title,
+        //   text,
+        //   image,
+        //   date,
+        //   edited,
+        //   edit_date,
+        // };
+
+        const toUpdatePost =
+          'UPDATE posts SET post_title = ?, post_title_ua = ?, post_title_fr = ?, post_short_text = ?, post_short_text_ua = ?, post_short_text_fr = ?, post_text = ?, post_text_ua = ?, post_text_fr = ?, post_images = ?, post_status = ?, post_published_date = ?, post_author = ? WHERE id = ?;';
+
+        connection.query(
+          toUpdatePost,
+          [...Object.values(updatedPost), id],
+          //   [title, text, image, date, edited, edit_date, id],
+          (err, results) => {
+            connection.release();
+
+            if (err) {
+              console.log(err);
+              return res.status(500).json({ error: 'Database error 11' });
+            }
+            // console.log(results);
+            // results.message = `You just edited post: ${title}`;
+            // res.json(results.message);
+            res.json(updatedPost);
+          }
+        );
+      });
     });
-  });
-  // if (!post) {
-  //   return res.status(404).json({ msg: 'Post not found' });
-  // }
+    // if (!post) {
+    //   return res.status(404).json({ msg: 'Post not found' });
+    // }
 
-  // // Check user
-  // const user = await User.findById(req.user.id).select('-password');
-  // if (user.status !== 'superuser') {
-  //   return res.status(401).json({ msg: 'User not authorized' });
-  // }
+    // // Check user
+    // const user = await User.findById(req.user.id).select('-password');
+    // if (user.status !== 'superuser') {
+    //   return res.status(401).json({ msg: 'User not authorized' });
+    // }
 
-  // // Edit the post
-  // const { title, text, image } = req.body;
-  // Object.assign(post, { title, text, image });
+    // // Edit the post
+    // const { title, text, image } = req.body;
+    // Object.assign(post, { title, text, image });
 
-  // await post.save();
+    // await post.save();
 
-  // res.json(post);
-});
+    // res.json(post);
+  }
+);
 
 module.exports = router;
 // export default router;
