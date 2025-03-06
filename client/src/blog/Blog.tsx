@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 import Typography from '@mui/material/Typography';
 
 // export default async function Blog() {
@@ -7,6 +8,7 @@ export default function Blog() {
   // This request should be refetched on every request.
   // Similar to `getServerSideProps`.
   // const dynamicData = await fetch(`https://...`, { cache: 'no-store' });
+  const [posts, setPosts] = useState([]);
 
   return (
     <div>
@@ -16,7 +18,7 @@ export default function Blog() {
         color="text.secondary"
         component="div"
       >
-        Blog
+        Blog for blog
       </Typography>
       Blog
       <div>news section</div>
