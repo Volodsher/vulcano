@@ -18,7 +18,7 @@ export default function Contact(): JSX.Element {
     useFormControls();
 
   return (
-    <Box id="contact">
+    <div id="contact">
       <Typography
         variant="h4"
         sx={{ textAlign: 'center', color: 'white', margin: '2rem 0' }}
@@ -132,6 +132,6 @@ export default function Contact(): JSX.Element {
           Send Message
         </Button>
       </form>
-    </Box>
+    </div>
   );
 }
