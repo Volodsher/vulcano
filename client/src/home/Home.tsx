@@ -4,12 +4,7 @@ import About from '../features/components/About';
 import Projects from '../features/components/Projects';
 import BrandLogos from '../features/components/BrandLogos';
 import Contact from '../features/components/Contact';
-import {
-  // BrowserRouter as Router,
-  // Routes,
-  // Route,
-  useLocation,
-} from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 export default function Home() {
   const location = useLocation();

@@ -15,7 +15,7 @@ export default function Footer() {
       }}
     >
       {/* &copy; Vulcano.top 2024 */}
-      2024 Volodymyr Sheremeta, volodsher.com
+      &copy; 2025 Volodymyr Sheremeta, volodsher.com
     </div>
   );
 }
