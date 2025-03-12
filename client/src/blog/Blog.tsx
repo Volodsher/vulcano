@@ -1,7 +1,8 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
-
+import Button from '@mui/joy/Button';
 // interface Settings {
 //   theme: string;
 //   notifications: boolean;
@@ -48,7 +49,19 @@ export default function Blog() {
         }
 
         const data: Post[] = await res.json();
-        setPosts(data);
+
+        // Ensure date conversion
+        const formattedData = data.map((post: any) => ({
+          ...post,
+          post_published_date: post.post_published_date
+            ? new Date(post.post_published_date)
+            : null,
+          post_edited_time: post.post_edited_time
+            ? new Date(post.post_edited_time)
+            : null,
+        })) as Post[]; // Type assertion here
+
+        setPosts(formattedData);
 
         console.log(data);
       } catch (error) {
@@ -62,19 +75,66 @@ export default function Blog() {
   }, []);
 
   return (
-    <div>
+    <div
+    // style={{
+    //   display: 'flex',
+    //   flexDirection: 'column',
+    //   alignItems: 'center',
+    // }}
+    >
       <Typography
         variant="h4"
         sx={{ textAlign: 'center', color: 'white', margin: '2rem 0' }}
         color="text.secondary"
         component="div"
       >
-        Blog for blog and again
+        Blog
       </Typography>
-      Blog
-      <div>news section</div>
+      <section
+        style={{
+          marginBottom: '2rem',
+          gridTemplateColumns: 'auto auto auto',
+        }}
+      >
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'auto auto auto auto auto auto',
+            rowGap: '1px', // Creates a gap that acts like a border
+            // backgroundColor: '#ccc',
+          }}
+        >
+          {posts.map((post) => (
+            <>
+              <p>
+                {post.post_published_date instanceof Date
+                  ? post.post_published_date.toLocaleDateString()
+                  : 'Invalid date'}
+              </p>
+
+              <p
+                style={{
+                  gridColumn: ' 2 / span 6',
+                  borderBottom: '1px solid #ccc',
+                  paddingBottom: '0,5rem',
+                }}
+              >
+                <Link to={'/blog/' + post.id}>{post.post_title}</Link>
+              </p>
+            </>
+          ))}
+          <div>pagination</div>
+        </div>
+      </section>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <Button type="submit">Get more</Button>
+      </div>
       {/* pagination or button with show more */}
-      <div>pagination</div>
     </div>
   );
 }
