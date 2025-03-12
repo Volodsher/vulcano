@@ -119,7 +119,12 @@ export default function Blog() {
                   paddingBottom: '0,5rem',
                 }}
               >
-                <Link to={'/blog/' + post.id}>{post.post_title}</Link>
+                <Link
+                  to={'/blog/' + post.id}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
+                >
+                  {post.post_title}
+                </Link>
               </p>
             </>
           ))}
@@ -132,7 +137,7 @@ export default function Blog() {
           justifyContent: 'center',
         }}
       >
-        <Button type="submit">Get more</Button>
+        <Button type="submit">Read more</Button>
       </div>
       {/* pagination or button with show more */}
     </div>
