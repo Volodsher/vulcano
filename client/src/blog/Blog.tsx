@@ -121,6 +121,7 @@ export default function Blog() {
               >
                 <Link
                   to={'/blog/' + post.id}
+                  state={post}
                   style={{ textDecoration: 'none', color: 'inherit' }}
                 >
                   {post.post_title}
