@@ -58,7 +58,7 @@ export default function Menu({
       </div>
 
       <Link
-        to="/blog"
+        to="/"
         className={styles.menuLink}
         style={{
           marginTop: menuOpen ? '0' : '-4rem',
@@ -66,28 +66,6 @@ export default function Menu({
         }}
       >
         <button className={styles.menuButton} onClick={changeMenuStatus}>
-          <FontAwesomeIcon icon={faBlog} size="2x" />
-        </button>
-        <p
-          style={{
-            display: menuOpen ? '' : 'none',
-          }}
-          className={styles.menuTitle}
-        >
-          Github
-        </p>
-      </Link>
-      <Link
-        // href="https://medium.com/@volodsher"
-        to="/"
-        className={styles.menuLink}
-        style={{
-          marginTop: menuOpen ? '0' : '-4rem',
-          top: menuOpen ? '11rem' : '3rem',
-        }}
-      >
-        <button className={styles.menuButton} onClick={changeMenuStatus}>
-          {/* <FontAwesomeIcon icon={faMedium} size="2x" /> */}
           <FontAwesomeIcon icon={faHouse} size="2x" />
         </button>
         <p
@@ -97,6 +75,28 @@ export default function Menu({
           className={styles.menuTitle}
         >
           Home
+        </p>
+      </Link>
+      <Link
+        // href="https://medium.com/@volodsher"
+        to="/blog"
+        className={styles.menuLink}
+        style={{
+          marginTop: menuOpen ? '0' : '-4rem',
+          top: menuOpen ? '11rem' : '3rem',
+        }}
+      >
+        <button className={styles.menuButton} onClick={changeMenuStatus}>
+          {/* <FontAwesomeIcon icon={faMedium} size="2x" /> */}
+          <FontAwesomeIcon icon={faBlog} size="2x" />
+        </button>
+        <p
+          style={{
+            display: menuOpen ? '' : 'none',
+          }}
+          className={styles.menuTitle}
+        >
+          Blog
         </p>
       </Link>
       <a
