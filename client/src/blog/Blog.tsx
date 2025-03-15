@@ -3,13 +3,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/joy/Button';
-// interface Settings {
-//   theme: string;
-//   notifications: boolean;
-// }
 
 interface Post {
-  // settings: Settings;
   id: string;
   post_title: string;
   post_title_ua: string;
@@ -28,9 +23,6 @@ interface Post {
 }
 
 export default function Blog() {
-  // This request should be refetched on every request.
-  // Similar to `getServerSideProps`.
-  // const dynamicData = await fetch(`https://...`, { cache: 'no-store' });
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -75,13 +67,7 @@ export default function Blog() {
   }, []);
 
   return (
-    <div
-    // style={{
-    //   display: 'flex',
-    //   flexDirection: 'column',
-    //   alignItems: 'center',
-    // }}
-    >
+    <div>
       <Typography
         variant="h4"
         sx={{ textAlign: 'center', color: 'white', margin: '2rem 0' }}
@@ -101,7 +87,6 @@ export default function Blog() {
             display: 'grid',
             gridTemplateColumns: 'auto auto auto auto auto auto',
             rowGap: '1px', // Creates a gap that acts like a border
-            // backgroundColor: '#ccc',
           }}
         >
           {posts.map((post) => (
