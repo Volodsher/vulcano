@@ -160,8 +160,6 @@ router.post(
           post_author,
         ],
         (err, results) => {
-          connection.release();
-
           if (err) {
             console.error(err);
             return res.status(500).json({ error: 'Database error 2' });
@@ -173,6 +171,7 @@ router.post(
           };
 
           res.json(results);
+          connection.release();
         }
       );
     });

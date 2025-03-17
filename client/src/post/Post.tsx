@@ -33,12 +33,12 @@ export default function Post() {
     <>
       <div>
         <h1>{post?.post_title}</h1>
-        <h2>
+        <h4>
           {post.post_published_date instanceof Date
             ? post.post_published_date.toLocaleDateString()
             : 'Invalid date'}
-        </h2>
-        <p>{post.post_text}</p>
+        </h4>
+        <p dangerouslySetInnerHTML={{ __html: post.post_text }} />
       </div>
       <div
         style={{

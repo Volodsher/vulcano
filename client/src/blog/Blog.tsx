@@ -91,7 +91,7 @@ export default function Blog() {
         >
           {posts.map((post) => (
             <>
-              <p>
+              <p style={{ paddingTop: '1.33em' }}>
                 {post.post_published_date instanceof Date
                   ? post.post_published_date.toLocaleDateString()
                   : 'Invalid date'}
@@ -109,12 +109,15 @@ export default function Blog() {
                   state={post}
                   style={{ textDecoration: 'none', color: 'inherit' }}
                 >
-                  {post.post_title}
+                  <h4>{post.post_title}</h4>
+                  <p
+                    dangerouslySetInnerHTML={{ __html: post.post_short_text }}
+                  />
                 </Link>
               </p>
             </>
           ))}
-          <div>pagination</div>
+          {/* <div>pagination</div> */}
         </div>
       </section>
       <div
