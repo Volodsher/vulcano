@@ -84,23 +84,24 @@ export default function Blog() {
           gridTemplateColumns: 'auto auto auto',
         }}
       >
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'auto auto auto auto auto auto',
-            rowGap: '1px', // Creates a gap that acts like a border
-          }}
-        >
+        <div>
           {posts ? (
-            posts.map((post) => (
-              <>
+            posts.slice(0, 5).map((post) => (
+              <div
+                key={post.id}
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'auto auto auto auto auto auto',
+                  rowGap: '1px', // Creates a gap that acts like a border
+                }}
+              >
                 <p style={{ paddingTop: '1.33em' }}>
                   {post.post_published_date instanceof Date
                     ? post.post_published_date.toLocaleDateString()
                     : 'Invalid date'}
                 </p>
 
-                <p
+                <div
                   style={{
                     gridColumn: ' 2 / span 6',
                     borderBottom: '1px solid #ccc',
@@ -117,8 +118,8 @@ export default function Blog() {
                       dangerouslySetInnerHTML={{ __html: post.post_short_text }}
                     />
                   </Link>
-                </p>
-              </>
+                </div>
+              </div>
             ))
           ) : (
             <p>Loading ...</p>
