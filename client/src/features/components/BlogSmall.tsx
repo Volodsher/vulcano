@@ -18,8 +18,7 @@ export default function BlogSmall() {
         Blog
       </Typography>
       <h3 style={{ textAlign: 'center' }}>
-        All of the information on this Blog is created with help only from MI
-        (try to guess what it is:)
+        Some thoughts about the tech and a bit more
       </h3>
 
       <div>Last 5 news</div>

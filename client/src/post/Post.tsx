@@ -53,7 +53,7 @@ export default function Post() {
             navigate(-1);
           }}
         >
-          Back to the Blog
+          Back
         </Button>
       </div>
     </>
