@@ -21,7 +21,7 @@ export default function BlogSmall() {
         Some thoughts about the tech and a bit more
       </h3>
 
-      <div>Last 5 news</div>
+      <div style={{ textAlign: 'center' }}>Last 5 news</div>
       <section
         style={{
           marginBottom: '2rem',
@@ -35,11 +35,13 @@ export default function BlogSmall() {
                 key={post.id}
                 style={{
                   display: 'grid',
+                  gap: '1em',
                   gridTemplateColumns: 'auto auto auto auto auto auto',
                   rowGap: '1px', // Creates a gap that acts like a border
                 }}
               >
-                <p style={{ paddingTop: '1.33em' }}>
+                {/* <p style={{ paddingTop: '1.33em' }}> */}
+                <p style={{ textAlign: 'right' }}>
                   {post.post_published_date instanceof Date
                     ? post.post_published_date.toLocaleDateString()
                     : 'Invalid date'}
@@ -57,8 +59,11 @@ export default function BlogSmall() {
                     state={post}
                     style={{ textDecoration: 'none', color: 'inherit' }}
                   >
-                    <h4>{post.post_title}</h4>
+                    <h4 style={{ marginTop: '1em', marginBottom: '0.5em' }}>
+                      {post.post_title}
+                    </h4>
                     <p
+                      style={{ marginTop: '0.5em', marginBottom: '0.5em' }}
                       dangerouslySetInnerHTML={{ __html: post.post_short_text }}
                     />
                   </Link>

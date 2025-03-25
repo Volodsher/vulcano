@@ -84,7 +84,7 @@ export default function Blog() {
           gridTemplateColumns: 'auto auto auto',
         }}
       >
-        <div>
+        {/* <div>
           {posts ? (
             posts.slice(0, 5).map((post) => (
               <div
@@ -115,6 +115,52 @@ export default function Blog() {
                   >
                     <h4>{post.post_title}</h4>
                     <p
+                      dangerouslySetInnerHTML={{ __html: post.post_short_text }}
+                    />
+                  </Link>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>Loading ...</p>
+          )}
+        </div> */}
+        <div>
+          {posts ? (
+            posts.map((post) => (
+              <div
+                key={post.id}
+                style={{
+                  display: 'grid',
+                  gap: '1em',
+                  gridTemplateColumns: 'auto auto auto auto auto auto',
+                  rowGap: '1px', // Creates a gap that acts like a border
+                }}
+              >
+                {/* <p style={{ paddingTop: '1.33em' }}> */}
+                <p style={{ textAlign: 'right' }}>
+                  {post.post_published_date instanceof Date
+                    ? post.post_published_date.toLocaleDateString()
+                    : 'Invalid date'}
+                </p>
+
+                <div
+                  style={{
+                    gridColumn: ' 2 / span 6',
+                    borderBottom: '1px solid #ccc',
+                    paddingBottom: '0,5rem',
+                  }}
+                >
+                  <Link
+                    to={'/blog/' + post.id}
+                    state={post}
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
+                    <h4 style={{ marginTop: '1em', marginBottom: '0.5em' }}>
+                      {post.post_title}
+                    </h4>
+                    <p
+                      style={{ marginTop: '0.5em', marginBottom: '0.5em' }}
                       dangerouslySetInnerHTML={{ __html: post.post_short_text }}
                     />
                   </Link>
